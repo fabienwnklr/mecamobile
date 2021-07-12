@@ -33,18 +33,14 @@
     </div>
 
     <v-row>
-      <v-col cols="12" lg="12" xl="8">
+      <v-col cols="12" lg="12" xl="12">
         <div>
           <div class="pt-16">
             <h2 class="text-h4 font-weight-bold pb-4">Recommended For You</h2>
 
             <v-row>
               <v-col cols="12" md="6" lg="4" v-for="i in 6" :key="i">
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="50"
-                  close-delay="50"
-                >
+                <v-hover v-slot:default="{ hover }" open-delay="50" close-delay="50">
                   <div>
                     <v-card
                       flat
@@ -72,8 +68,8 @@
                         </div>
 
                         <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis
+                          Ultrices sagittis orci a scelerisque. Massa placerat duis
+                          ultricies lacus sed turpis
                         </div>
 
                         <div class="d-flex align-center">
@@ -104,9 +100,7 @@
                     height="600px"
                     class="elevation-2 fill-height"
                   >
-                    <div
-                      class="d-flex flex-column justify-space-between fill-height"
-                    >
+                    <div class="d-flex flex-column justify-space-between fill-height">
                       <v-card-text>
                         <v-btn color="accent">ANIMALS</v-btn>
                       </v-card-text>
@@ -158,10 +152,10 @@
                     </h3>
 
                     <p class="text-h6 font-weight-regular pt-3 text--secondary">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                      sint occaecat cupidatat non proident, sunt in culpa qui
-                      officia deserunt mollit anim id est laborum.
+                      Duis aute irure dolor in reprehenderit in voluptate velit esse
+                      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                      cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                      anim id est laborum.
                     </p>
 
                     <div class="d-flex align-center">
@@ -178,12 +172,6 @@
           </div>
         </div>
       </v-col>
-
-      <v-col>
-        <div class="pt-16">
-          <siderbar />
-        </div>
-      </v-col>
     </v-row>
   </div>
 </template>
@@ -191,8 +179,5 @@
 <script>
 export default {
   name: "Home",
-  components: {
-    siderbar: () => import("@/components/details/sidebar"),
-  },
 };
 </script>

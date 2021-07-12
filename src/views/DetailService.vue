@@ -22,8 +22,10 @@
                 </div>
 
                 <div class="text-body-1 py-4">
-                  Mattis enim ut tellus elementum sagittis vitae et. Enim ut tellus elementum sagittis vitae et leo duis ut. Quis vel eros donec.
-                  Faucibus nisl tincidunt eget nullam. Quis commodo odio aenean sed adipiscing diam doneg.
+                  Mattis enim ut tellus elementum sagittis vitae et. Enim ut tellus
+                  elementum sagittis vitae et leo duis ut. Quis vel eros donec. Faucibus
+                  nisl tincidunt eget nullam. Quis commodo odio aenean sed adipiscing diam
+                  doneg.
                 </div>
 
                 <div class="d-flex align-center justify-space-between">
@@ -52,12 +54,17 @@
 
                 <div>
                   <p class="text-subtitle-1 primary--text font-weight-medium">
-                    Dignissim cras tincidunt lobortis feugiat vivamus at. Amet luctus venenatis lectus magna fringilla. Nibh tellus molestie nunc non blandit.
-                    Et magnis dis parturient montes nascetur ridiculus mus mauris vitae. Amet massa vitae tortor condimentum lacinia quis vel eros. Eros
-                    in cursus turpis massa tincidunt dui ut ornare. Est ante in nibh mauris cursus mattis molestie. Nec ullamcorper sit amet risus nullam
-                    eget felis eget. Tincidunt praesent semper feugiat nibh sed. Et leo duis ut diam quam nulla pottitor massa id. Convallis convallis tellus id
-                    interdum velit laoreet id. Enim ut sem viverra aliquet eget sit. Mollis aliquam ut porttitor leo a diam. Eleifend donec pretium vulputate
-                    sapien nec sagittis aliquam. Velit egestas dui id ornares.
+                    Dignissim cras tincidunt lobortis feugiat vivamus at. Amet luctus
+                    venenatis lectus magna fringilla. Nibh tellus molestie nunc non
+                    blandit. Et magnis dis parturient montes nascetur ridiculus mus mauris
+                    vitae. Amet massa vitae tortor condimentum lacinia quis vel eros. Eros
+                    in cursus turpis massa tincidunt dui ut ornare. Est ante in nibh
+                    mauris cursus mattis molestie. Nec ullamcorper sit amet risus nullam
+                    eget felis eget. Tincidunt praesent semper feugiat nibh sed. Et leo
+                    duis ut diam quam nulla pottitor massa id. Convallis convallis tellus
+                    id interdum velit laoreet id. Enim ut sem viverra aliquet eget sit.
+                    Mollis aliquam ut porttitor leo a diam. Eleifend donec pretium
+                    vulputate sapien nec sagittis aliquam. Velit egestas dui id ornares.
                   </p>
                 </div>
 
@@ -68,17 +75,20 @@
                     colored-border
                     color="accent"
                   >
-                    Srem Ipsum is simply dummy text of the printing and typesetting industry. Lorem lpsum has been
-                    the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply .
+                    Srem Ipsum is simply dummy text of the printing and typesetting
+                    industry. Lorem lpsum has been the industry's standard dummy text ever
+                    since the 1500s. Lorem Ipsum is simply .
                   </v-alert>
                 </div>
 
                 <div class="text-h5 primary--text font-weight-bold">
                   Ultricies mi quis hendrerit dolor
                   <p class="text-subtitle-1 primary--text font-weight-medium mt-5">
-                    Quam adipiscing vitae proin sagittis nisl rhoncus. Integer vitae justo eget magna fermentum iaculis eu non. Vitae congue mauris
-                    rhoncus aenean vel elit. Nibh mauris cursus mattis molestie. Etiam sit amet nisl purus. At auctor urna nunc id cursus metus. Diam in arcu
-                    cursus euismod quis viverra nibh cras.
+                    Quam adipiscing vitae proin sagittis nisl rhoncus. Integer vitae justo
+                    eget magna fermentum iaculis eu non. Vitae congue mauris rhoncus
+                    aenean vel elit. Nibh mauris cursus mattis molestie. Etiam sit amet
+                    nisl purus. At auctor urna nunc id cursus metus. Diam in arcu cursus
+                    euismod quis viverra nibh cras.
                   </p>
                 </div>
 
@@ -111,24 +121,30 @@
                   <div class="text-subtitle-1 primary--text font-weight-medium mt-5">
                     <ul>
                       <li class="my-2">
-                        Aliquam purus sit amet luctus venenatis lectus magna fringilla urna. Malesuada bibendum arcu vitae elementum curabitur vitae
-                        nunc sed. Urna porttitor rhoncus dolor purus non enim praesent elementum facilisis.
+                        Aliquam purus sit amet luctus venenatis lectus magna fringilla
+                        urna. Malesuada bibendum arcu vitae elementum curabitur vitae nunc
+                        sed. Urna porttitor rhoncus dolor purus non enim praesent
+                        elementum facilisis.
                       </li>
 
                       <li class="my-2">
-                        Proin libero nunc consequat interdum varius. Amet luctus venenatis lectus magna fringillal urna porttitor. Enim tortor at auctor
-                        urna nunc id cursus.
+                        Proin libero nunc consequat interdum varius. Amet luctus venenatis
+                        lectus magna fringillal urna porttitor. Enim tortor at auctor urna
+                        nunc id cursus.
                       </li>
 
                       <li class="my-2">
-                        Volutpat maecenas volutpat blandit aliquam. Adipiscing enim eu turpis egestas pretium aenean pharetra magna Morbi leo
-                        urna molestie at elementum eu.
+                        Volutpat maecenas volutpat blandit aliquam. Adipiscing enim eu
+                        turpis egestas pretium aenean pharetra magna Morbi leo urna
+                        molestie at elementum eu.
                       </li>
                     </ul>
 
                     <p>
-                      Venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus. Semper auctor neque vitae tempus. Magnis dis
-                      parturient montes nascetur ridiculus mus. A condimentum vitae sapien pellentesque habitant morbi tristique. Duis ut diam quam nulla
+                      Venenatis a condimentum vitae sapien pellentesque habitant morbi
+                      tristique senectus. Semper auctor neque vitae tempus. Magnis dis
+                      parturient montes nascetur ridiculus mus. A condimentum vitae sapien
+                      pellentesque habitant morbi tristique. Duis ut diam quam nulla
                       porttitor.
                     </p>
                   </div>
@@ -186,7 +202,8 @@
                       </div>
 
                       <div class="text-subtitle-1 my-2">
-                        Congue mauris rhoncus aenean vel elit. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Aliquet nec
+                        Congue mauris rhoncus aenean vel elit. Elit scelerisque mauris
+                        pellentesque pulvinar pellentesque habitant. Aliquet nec
                         ullamcorper sit amet risus nullam eget felis.
                       </div>
 
@@ -221,8 +238,8 @@
                         </div>
 
                         <div class="text-h6 primary--text pl-2">
-                          <div class="text-subtitle-1">Previous Post</div>Photos of Jeep models that will change
-                          your mood
+                          <div class="text-subtitle-1">Previous Post</div>
+                          Photos of Jeep models that will change your mood
                         </div>
                       </div>
                     </v-col>
@@ -230,8 +247,8 @@
                     <v-col cols="12" md="6" lg="4">
                       <div class="d-flex align-center text-right">
                         <div class="text-h6 primary--text pr-2">
-                          <div class="text-subtitle-1">Next Post</div>What do I need to know to start learning
-                          JavaScript?
+                          <div class="text-subtitle-1">Next Post</div>
+                          What do I need to know to start learning JavaScript?
                         </div>
 
                         <div>
@@ -246,12 +263,6 @@
           </div>
         </div>
       </v-col>
-
-      <v-col>
-        <div>
-          <siderbar />
-        </div>
-      </v-col>
     </v-row>
   </div>
 </template>
@@ -259,8 +270,5 @@
 <script>
 export default {
   name: "Category",
-  components: {
-    siderbar: () => import("@/components/details/sidebar")
-  }
 };
 </script>

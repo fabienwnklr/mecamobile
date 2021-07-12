@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="12" lg="12" xl="8">
+      <v-col cols="12" lg="12" xl="12">
         <div>
           <div>
             <div>
@@ -14,11 +14,7 @@
 
             <v-row>
               <v-col cols="12" md="6" lg="4" v-for="i in 18" :key="i">
-                <v-hover
-                  v-slot:default="{ hover }"
-                  open-delay="50"
-                  close-delay="50"
-                >
+                <v-hover v-slot:default="{ hover }" open-delay="50" close-delay="50">
                   <div>
                     <v-card
                       flat
@@ -46,8 +42,8 @@
                         </div>
 
                         <div class="text-body-1 py-4">
-                          Ultrices sagittis orci a scelerisque. Massa placerat
-                          duis ultricies lacus sed turpis
+                          Ultrices sagittis orci a scelerisque. Massa placerat duis
+                          ultricies lacus sed turpis
                         </div>
 
                         <div class="d-flex align-center">
@@ -66,21 +62,12 @@
           </div>
         </div>
       </v-col>
-
-      <v-col>
-        <div>
-          <siderbar />
-        </div>
-      </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Category",
-  components: {
-    siderbar: () => import("@/components/details/sidebar"),
-  },
+  name: "Services",
 };
 </script>

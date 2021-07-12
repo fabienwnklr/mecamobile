@@ -104,29 +104,25 @@ export default {
     drawer: null,
     btnItems: [
       {
-        text: "Free Download",
-        href: "https://github.com/AGDholo/giraffe",
-        target: "_black",
+        text: "Nous contacter",
+        href: "#",
+        target: "",
         color: "primary",
-        icon: "mdi-download",
+        icon: "mdi-mail",
       },
     ],
     barItems: [
       {
-        title: "Home",
+        title: "Accueil",
         to: "/",
       },
       {
-        title: "Category",
-        to: "/category",
+        title: "Nos services",
+        to: "/services",
       },
       {
-        title: "Detail",
-        to: "/detail",
-      },
-      {
-        title: "Authors",
-        to: "/authors",
+        title: "Contact",
+        to: "/contact",
       },
     ],
   }),
