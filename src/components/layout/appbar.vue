@@ -11,7 +11,7 @@
       <v-list nav color="primary">
         <v-list-item
           v-for="(item, i) in btnItems"
-          :key="i"
+          :key="i + 100"
           link
           :to="item.to"
           :href="item.href"
@@ -99,7 +99,7 @@ export default {
     btnItems: [
       {
         text: "Nous contacter",
-        href: "#",
+        to: "/contact",
         target: "",
         color: "primary",
         icon: "mdi-email-send-outline",

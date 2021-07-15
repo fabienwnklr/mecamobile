@@ -4,12 +4,10 @@
       <v-container>
         <v-row align="start">
           <v-col cols="12" md="3">
-            <h4 class="text-h5 font-weight-bold">
-              Giraffe
-            </h4>
+            <h4 class="text-h5 font-weight-bold">Giraffe</h4>
             <p class="text-body-1">
-              Create, prototype, collaborate and turn your ideas into incredible
-              products with the definitive platform for digital design.
+              Create, prototype, collaborate and turn your ideas into incredible products
+              with the definitive platform for digital design.
             </p>
           </v-col>
 
@@ -25,10 +23,10 @@
                   target="_black"
                 >
                   <v-list-item-content>
-                    <v-list-item-title
-                      class="text-body-1"
-                      v-text="item.text"
-                    ></v-list-item-title>
+                    <v-list-item-title class="text-body-1">
+                      <v-icon>{{ item.icon }}</v-icon>
+                      {{ item.text }}
+                    </v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </v-list-item-group>
@@ -59,29 +57,20 @@
 
           <v-col cols="12" md="3">
             <div>
-              <h5 class="text-h6 font-weight-bold">
-                Subscribe
-              </h5>
+              <h5 class="text-h6 font-weight-bold">Subscribe</h5>
               <p class="text-body-1">
-                The latest Rocket news, articles, and resources, sent straight
-                to your inbox every month.
+                The latest Rocket news, articles, and resources, sent straight to your
+                inbox every month.
               </p>
             </div>
 
             <v-row>
               <v-col cols="8">
-                <v-text-field
-                  label="Filled"
-                  solo
-                  light
-                  hide-details
-                ></v-text-field>
+                <v-text-field label="Filled" solo light hide-details></v-text-field>
               </v-col>
 
               <v-col cols="4">
-                <v-btn large block color="secondary">
-                  Subscribe
-                </v-btn>
+                <v-btn large block color="secondary"> Subscribe </v-btn>
               </v-col>
             </v-row>
           </v-col>
@@ -108,12 +97,14 @@ export default {
   data: () => ({
     heroui: [
       {
-        text: "Github",
-        href: "https://github.com/AGDholo",
+        icon: "mdi-instagram",
+        text: "Instagram",
+        href: "#",
       },
       {
-        text: "Themes",
-        href: "https://heroui.net/",
+        icon: "mdi-facebook",
+        text: "Facebook",
+        href: "#",
       },
     ],
     shock: [
