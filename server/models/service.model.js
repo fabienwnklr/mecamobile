@@ -5,6 +5,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(100),
             allowNull: false
         },
+        icon: {
+            type: Sequelize.STRING(7),
+            allowNull: false
+        },
         status: {
             type: Sequelize.STRING(7),
             allowNull: false,

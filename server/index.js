@@ -5,10 +5,12 @@ const authJwt = require("./middleware/authJwt");
 const helmet = require('helmet');
 const port = 3000;
 const app = express();
+const cors = require("cors");
 
 // Security
 app.use(helmet());
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(

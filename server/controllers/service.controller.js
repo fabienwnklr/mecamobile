@@ -2,7 +2,7 @@ const db = require('../models');
 const Service = db.service;
 
 exports.getAllServices = (req, res) => {
-    Service.findAll({ where: { status: 'online' } })
+    Service.findAll({ attributes: ['name', 'description'], where: { status: 'online' } })
         .then(data => {
             res.send(data).status(200)
         })
