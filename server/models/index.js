@@ -10,7 +10,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-// Tables principales
 db.user = require('./user.model')(sequelize, Sequelize);
+db.service = require('./service.model')(sequelize, Sequelize);
 
 module.exports = db;

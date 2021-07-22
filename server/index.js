@@ -27,7 +27,7 @@ app.get("/api/checkToken", authJwt.verifyToken, (req, res) => {
     });
 });
 require("./routes/auth.routes")(app);
-// require("./routes/user.routes")(app);
+require("./routes/service.routes")(app);
 
 db.sequelize.sync({ force: false }).then(() => {
     console.info("Re-sync db.");
