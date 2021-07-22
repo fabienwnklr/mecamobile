@@ -122,5 +122,20 @@ export default {
       },
     ],
   }),
+  methods: {
+    getServices() {
+      const that = this;
+
+      this.$http
+        .get("/service")
+        .then((result) => {
+          that.services = result.data;
+        })
+        .catch((error) => console.error(error));
+    },
+  },
+  mounted() {
+    this.getServices();
+  },
 };
 </script>
