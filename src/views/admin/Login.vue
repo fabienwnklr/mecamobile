@@ -9,8 +9,8 @@
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-text-field
-                v-model="name"
-                :rules="nameRules"
+                v-model="userName"
+                :rules="userNameRules"
                 label="Nom d'utilisateur"
                 required
               ></v-text-field>
@@ -26,7 +26,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn :disabled="!valid" color="success" @click="validate">
+                <v-btn :disabled="!valid" color="success" @click="login">
                   Se connecter
                 </v-btn>
               </v-card-actions>
@@ -42,17 +42,43 @@
 export default {
   data: () => ({
     valid: false,
-    name: "",
+    loading: false,
+    userName: "",
     pass: "",
-    nameRules: [(v) => !!v || "E-mail requis"],
+    userNameRules: [(v) => !!v || "E-mail requis"],
     passRules: [(v) => !!v || "Mot de passe requis"],
     select: null,
     checkbox: false,
   }),
 
   methods: {
-    validate() {
+    login() {
+      const that = this;
+
       this.$refs.form.validate();
+
+      if (this.valid) {
+        this.loading = true;
+        this.$http
+          .post("/auth/login", {
+            username: this.userName,
+            password: this.pass,
+          })
+          .then((response) => {
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+            localStorage.setItem("jwt", JSON.stringify(response.data.token));
+
+            that.$http.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${response.data.token}`;
+
+            if (that.$route.params.nextUrl != null) {
+              that.$router.push(this.$route.params.nextUrl);
+            } else {
+              that.$router.push("/");
+            }
+          });
+      }
     },
   },
 };

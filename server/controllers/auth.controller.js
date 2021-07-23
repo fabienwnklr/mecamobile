@@ -4,16 +4,17 @@ const User = db.user;
 const jwt = require('jsonwebtoken');
 
 exports.login = (req, res) => {
-    const email = req.body.email;
+    const username = req.body.username;
     const pass = req.body.password;
-    if (!email || !pass) {
+
+    if (!username || !pass) {
         res.status(400).json({
             message: 'Veuillez remplir tous les champs.'
         });
         return;
     }
 
-    User.findOne({ where: { email: email } })
+    User.findOne({ where: { username } })
         .then(data => {
             if (!data) {
                 res.status(400).send({
@@ -31,7 +32,7 @@ exports.login = (req, res) => {
                 }
                 jwt.sign({ user: userLogged }, 'secretkey', { expiresIn: '7d' }, (err, token) => {
                     if (err) res.json(err)
-                    res.send({ auth: true, token: token, user: userLogged }).status(200)
+                    res.send({ token: token, user: userLogged }).status(200)
                 })
             } else {
                 res.status(403).send({

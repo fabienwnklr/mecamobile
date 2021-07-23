@@ -36,7 +36,7 @@ const routes = [
       },
       {
         path: '/admin/dashboard', name: 'Dashboard', component: () => import('@/views/admin/Dashboard.vue'), meta: {
-          requiresAuth: true
+          requiresAuth: true, is_admin: true
         }
       }
     ]
@@ -54,8 +54,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   NProgress.start();
-  const userItem = localStorage.getItem("user");
-  let user = userItem !== null ? JSON.parse(userItem) : undefined;
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (localStorage.getItem('jwt') == null) {
       next({
@@ -65,17 +63,7 @@ router.beforeEach((to, from, next) => {
         }
       });
     } else {
-      if (to.matched.some(record => record.meta.is_admin)) {
-        if (user !== "undefined" && user.is_admin == 1) {
-          next();
-        } else {
-          next({
-            name: "home"
-          });
-        }
-      } else {
-        next();
-      }
+      next();
     }
   } else if (to.matched.some(record => record.meta.guest)) {
     if (localStorage.getItem("jwt") == null) {
