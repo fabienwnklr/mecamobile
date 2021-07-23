@@ -8,8 +8,6 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@tiptap/starter-kit": "^2.0.0-beta.82",
-    "@tiptap/vue-2": "^2.0.0-beta.39",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
@@ -23,6 +21,7 @@
     "nprogress": "^0.2.0",
     "sequelize": "^6.6.5",
     "vue": "^2.6.11",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.2.0",
     "vuetify": "^2.5.0"
   },
