@@ -9,10 +9,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(7),
             allowNull: false
         },
-        status: {
-            type: Sequelize.STRING(7),
+        online: {
+            type: Sequelize.BOOLEAN(),
             allowNull: false,
-            defaultValue: 'online'
+            defaultValue: true
         },
         description: {
             type: Sequelize.TEXT(),

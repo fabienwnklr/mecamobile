@@ -31,7 +31,7 @@ app.get("/api/checkToken", authJwt.verifyToken, (req, res) => {
 require("./routes/auth.routes")(app);
 require("./routes/service.routes")(app);
 
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ alter: false }).then(() => {
     console.info("Re-sync db.");
     app.listen(port, () => {
         console.info(`API run at http://localhost:${port}`);

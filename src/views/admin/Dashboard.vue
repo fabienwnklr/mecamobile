@@ -1,8 +1,8 @@
 <template>
-  <v-container>
+  <div>
     <h1>tutu</h1>
     <h2>tototo</h2>
-  </v-container>
+  </div>
 </template>
 
 <script>

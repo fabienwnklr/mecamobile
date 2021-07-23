@@ -2,7 +2,20 @@ const db = require('../models');
 const Service = db.service;
 
 exports.getAllServices = (req, res) => {
-    Service.findAll({ attributes: ['name', 'description'], where: { status: 'online' } })
+    Service.findAll()
+        .then(data => {
+            res.send(data).status(200)
+        })
+        .catch(err =>
+            res.status(500).send({
+                errorThrow: err.message,
+                message: 'Erreur lors de la récupération des services.'
+            })
+        )
+}
+
+exports.getAllActifServices = (req, res) => {
+    Service.findAll({ attributes: ['name', 'description'], where: { online: '1' } })
         .then(data => {
             res.send(data).status(200)
         })

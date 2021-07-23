@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import NProgress from 'nprogress';
 import "nprogress/nprogress.css";
+
+// Custom component
+import Home from '../views/Home.vue'
+import CreateService from '../views/admin/services/Create.vue'
+import EditService from '../views/admin/services/Edit.vue'
+import ListService from '../views/admin/services/List.vue'
 
 Vue.use(VueRouter)
 
@@ -27,18 +32,47 @@ const routes = [
     name: 'Admin',
     redirect: "/admin/login",
     component: () => import("@/views/admin/Index.vue"),
-    meta: {
-      guest: true
-    },
     children: [
       {
-        path: '/admin/login', name: 'Login', component: () => import('@/views/admin/Login.vue')
+        path: '/admin/login',
+        name: 'Login',
+        component: () => import('@/views/admin/Login.vue')
       },
       {
-        path: '/admin/dashboard', name: 'Dashboard', component: () => import('@/views/admin/Dashboard.vue'), meta: {
+        path: '/admin/dashboard',
+        name: 'Dashboard',
+        component: () => import('@/views/admin/Dashboard.vue'),
+        meta: {
           requiresAuth: true, is_admin: true
         }
-      }
+      },
+      {
+        path: '/admin/services/list',
+        name: 'Services/List',
+        component: ListService,
+        meta: {
+          requiresAuth: true,
+          is_admin: true,
+        },
+      },
+      {
+        path: '/admin/services/create',
+        name: 'Service/Create',
+        component: CreateService,
+        meta: { requiresAuth: true, is_admin: true }
+      },
+      {
+        path: '/admin/services/edit/:id',
+        name: 'Service/Edit',
+        component: EditService,
+        meta: { requiresAuth: true, is_admin: true }
+      },
+      {
+        path: '/admin/messages', name: 'Messages', component: () => import('@/views/admin/messages/Messages.vue'),
+        meta: {
+          requiresAuth: true, is_admin: true
+        }
+      },
     ]
   }
 ]
@@ -64,14 +98,6 @@ router.beforeEach((to, from, next) => {
       });
     } else {
       next();
-    }
-  } else if (to.matched.some(record => record.meta.guest)) {
-    if (localStorage.getItem("jwt") == null) {
-      next();
-    } else {
-      next({
-        name: "home"
-      });
     }
   } else {
     next();

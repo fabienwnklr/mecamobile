@@ -7,7 +7,7 @@
             Connexion à la console d'administration
           </v-card-title>
           <v-card-text>
-            <v-form ref="form" v-model="valid" lazy-validation>
+            <v-form v-model="valid" lazy-validation ref="loginForm">
               <v-text-field
                 v-model="userName"
                 :rules="userNameRules"
@@ -26,7 +26,13 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn :disabled="!valid" color="success" @click="login">
+                <v-btn
+                  :disabled="!valid || loading"
+                  :loading="loading"
+                  color="success"
+                  v-on:click="login"
+                  type="submit"
+                >
                   Se connecter
                 </v-btn>
               </v-card-actions>
@@ -52,10 +58,17 @@ export default {
   }),
 
   methods: {
+    clear() {
+      this.userName = "";
+      this.pass = "";
+      this.valid = false;
+      this.loading = false;
+      this.$refs.loginForm.resetValidation();
+    },
     login() {
       const that = this;
 
-      this.$refs.form.validate();
+      this.$refs.loginForm.validate();
 
       if (this.valid) {
         this.loading = true;
@@ -75,8 +88,12 @@ export default {
             if (that.$route.params.nextUrl != null) {
               that.$router.push(this.$route.params.nextUrl);
             } else {
-              that.$router.push("/");
+              that.$router.push("/admin/dashboard");
             }
+          })
+          .catch((error) => {
+            console.error(error);
+            this.clear();
           });
       }
     },
