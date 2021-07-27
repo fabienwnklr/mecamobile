@@ -12,17 +12,23 @@
       Création du service : {{ service.name }}
     </h1>
 
-    <v-form v-model="valid" lazy-validation ref="editService" class="mt-5">
+    <v-form v-model="valid" lazy-validation ref="createService" class="mt-5">
       <v-container class="pa-0">
         <v-row class="justify-content-between">
           <v-col cols="12">
             <v-row>
               <v-col cols="2">
-                <v-text-field solo v-model="service.icon" label="icon"></v-text-field>
+                <v-text-field
+                  :rules="rules"
+                  outlined
+                  v-model="service.icon"
+                  label="icon"
+                ></v-text-field>
               </v-col>
               <v-col cols="6">
                 <v-text-field
-                  solo
+                  :rules="rules"
+                  outlined
                   v-model="service.name"
                   label="Nom du service"
                   required
@@ -38,16 +44,22 @@
             </v-row>
           </v-col>
           <v-col cols="12">
-            <quill-editor v-model="service.description"></quill-editor>
+            <quill-editor
+              class="editor"
+              ref="createEditor"
+              v-model="service.description"
+            ></quill-editor>
           </v-col>
 
           <v-col class="justify-content-end">
-            <v-btn @click="createService" color="success"> Enregistrer </v-btn>
+            <v-btn @click="createService" :disabled="!valid" color="success">
+              Enregistrer
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>
     </v-form>
-    <v-snackbar v-model="snackbar" :color="snackbarColor">
+    <v-snackbar top v-model="snackbar" :color="snackbarColor">
       {{ snackbarText }}
 
       <template v-slot:action="{ attrs }">
@@ -80,10 +92,24 @@ export default {
       name: "",
       description: "",
     },
+    rules: [(v) => !!v || "Champ requis."],
   }),
   methods: {
     createService() {
+      this.valid = this.$refs.createService.validate();
+
+      if (!this.valid) return;
+
+      if (["", "\n"].includes(this.$refs.createEditor.quill.getText())) {
+        this.snackbar = true;
+        this.snackbarText = "Une déscription est requise.";
+        this.snackbarColor = "red";
+        return;
+      }
+
       const that = this;
+
+      this.service.creator = JSON.parse(localStorage.getItem("user")).username;
 
       this.$http
         .post(`/service`, this.service)
@@ -93,6 +119,7 @@ export default {
           that.snackbarText = res.data.message;
           that.snackbarColor = "success";
           this.clear();
+          this.$refs.createService.resetValidation();
         })
         .catch((err) => {
           console.error(err);

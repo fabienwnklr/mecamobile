@@ -19,14 +19,20 @@
           <v-col cols="12">
             <v-row>
               <v-col cols="2">
-                <v-text-field solo v-model="service.icon" label="icon"></v-text-field>
+                <v-text-field
+                  :rules="rules"
+                  outlined
+                  v-model="service.icon"
+                  label="icon"
+                ></v-text-field>
               </v-col>
               <v-col cols="6">
                 <v-text-field
-                  solo
+                  outlined
                   v-model="service.name"
                   label="Nom du service"
                   required
+                  :rules="rules"
                 ></v-text-field>
               </v-col>
               <v-col cols="2" class="">
@@ -39,7 +45,7 @@
             </v-row>
           </v-col>
           <v-col cols="12">
-            <quill-editor v-model="service.description"></quill-editor>
+            <quill-editor ref="editEditor" v-model="service.description"></quill-editor>
           </v-col>
 
           <v-col class="justify-content-end">
@@ -48,6 +54,15 @@
         </v-row>
       </v-container>
     </v-form>
+    <v-snackbar top v-model="snackbar" :color="snackbarColor">
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -64,21 +79,21 @@ export default {
     quillEditor,
   },
   data: () => ({
-    valid: true,
+    snackbar: false,
+    snackbarText: "",
+    snackbarColor: "",
+    valid: false,
     changed: false,
     service: {},
     cloneService: null,
+    rules: [(v) => !!v || "Champ requis."],
   }),
   methods: {
-    checkModif() {
-      if (this.cloneService === null) {
-        this.cloneService = Object.assign({}, this.service);
-      }
-
+    isModified() {
       if (JSON.stringify(this.cloneService) !== JSON.stringify(this.service)) {
-        return "modified";
+        return true;
       }
-      return "not modified";
+      return false;
     },
     getService() {
       const that = this;
@@ -86,15 +101,33 @@ export default {
       this.$http(`/service/${this.$route.params.id}`)
         .then((res) => {
           that.service = res.data;
+          if (this.cloneService === null) {
+            this.cloneService = Object.assign({}, this.service);
+          }
         })
         .catch((err) => console.error(err));
     },
-
     updateService() {
+      this.valid = this.$refs.editService.validate();
+
+      if (!this.isModified() || !this.valid) return;
+
+      if (["", "\n"].includes(this.$refs.editEditor.quill.getText())) {
+        this.snackbar = true;
+        this.snackbarText = "Une déscription est requise.";
+        this.snackbarColor = "red";
+        return;
+      }
+
+      const that = this;
+
       this.$http
         .put(`/service/${this.$route.params.id}`, this.service)
         .then((res) => {
           console.log(res);
+          that.snackbar = true;
+          that.snackbarText = res.data.message;
+          that.snackbarColor = "success";
         })
         .catch((err) => {
           console.error(err);

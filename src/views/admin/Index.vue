@@ -25,17 +25,12 @@ export default {
         if (jwt !== null && user !== null) {
           this.$http(`/auth/${user.id}`)
             .then(() => {
-              _this
-                .$http("/checkToken")
-                .then((res) => {
-                  console.log("token valid", res);
-                })
-                .catch((err) => {
-                  console.error(err);
-                  _this.$router.push({ name: "Login" });
-                  localStorage.removeItem("user");
-                  localStorage.removeItem("jwt");
-                });
+              _this.$http("/checkToken").catch((err) => {
+                console.error(err);
+                _this.$router.push({ name: "Login" });
+                localStorage.removeItem("user");
+                localStorage.removeItem("jwt");
+              });
             })
             .catch((err) => {
               console.error(err);

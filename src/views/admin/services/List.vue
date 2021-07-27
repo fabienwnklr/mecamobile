@@ -53,6 +53,10 @@
         </td>
       </template>
 
+      <template v-slot:[`item.description`]="{ item }">
+        <span v-html="item.description"></span>
+      </template>
+
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon class="mr-2" @click="editService(item.id)"> mdi-pencil </v-icon>
         <v-icon @click="deleteItem(item)"> mdi-delete </v-icon>
@@ -85,7 +89,7 @@ export default {
           align: "start",
           value: "name",
         },
-        { text: "Description", value: "description" },
+        { text: "Description", value: "description", html: true },
         { text: "Actif", value: "online" },
         { text: "Actions ", value: "actions", sortable: false },
       ],

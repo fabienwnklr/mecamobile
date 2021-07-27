@@ -43,7 +43,8 @@ exports.addService = (req, res) => {
         icon: req.body.name,
         name: req.body.name,
         status: req.body.status,
-        description: req.body.description
+        description: req.body.description,
+        createdBy: req.body.creator
     };
 
     Service.create(newService).then(data => {
@@ -71,7 +72,7 @@ exports.updateService = (req, res) => {
             if (num) {
                 res.status(200).send({
                     values,
-                    message: "Modification(s) sauvegardé.",
+                    message: "Modification(s) sauvegardée(s).",
                 });
             }
         })
