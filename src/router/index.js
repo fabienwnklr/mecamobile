@@ -13,6 +13,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: "*",
+    name: "NotFound",
+    component: () => import("@/views/error/404.vue")
+  },
+  {
     path: '/',
     name: 'Accueil',
     component: Home

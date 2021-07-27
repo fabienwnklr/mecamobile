@@ -1,14 +1,17 @@
 <template>
   <div>
     <h1>
-      <v-icon
-        :title="service.online ? 'Service en ligne' : 'Service hors ligne'"
-        :color="service.online ? 'success' : 'warning'"
-        large
-        >mdi-{{
-          service.online ? "access-point-check" : "access-point-network-off"
-        }}</v-icon
-      >
+      <v-slide-x-reverse-transition mode="out-in">
+        <v-icon
+          :key="`icon-${service.online}`"
+          :title="service.online ? 'Service en ligne' : 'Service hors ligne'"
+          :color="service.online ? 'success' : 'warning'"
+          x-large
+          >mdi-{{
+            service.online ? "access-point-check" : "access-point-network-off"
+          }}</v-icon
+        >
+      </v-slide-x-reverse-transition>
       Création du service : {{ service.name }}
     </h1>
 

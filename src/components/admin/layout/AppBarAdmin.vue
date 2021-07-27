@@ -57,6 +57,10 @@ export default {
         title: "Mes services",
         to: "/admin/services/list",
       },
+      {
+        title: "Utilisateurs",
+        to: "/admin/users/list",
+      },
     ],
   }),
   methods: {
