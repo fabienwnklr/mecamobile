@@ -47,6 +47,13 @@
         </v-row>
       </v-container>
     </v-form>
+    <v-snackbar v-model="snackbar" :color="snackbarColor">
+      {{ snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false"> Close </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -63,6 +70,9 @@ export default {
     quillEditor,
   },
   data: () => ({
+    snackbar: false,
+    snackbarText: "",
+    snackbarColor: "",
     valid: false,
     service: {
       icon: "",
@@ -73,14 +83,29 @@ export default {
   }),
   methods: {
     createService() {
+      const that = this;
+
       this.$http
         .post(`/service`, this.service)
         .then((res) => {
           console.log(res);
+          that.snackbar = true;
+          that.snackbarText = res.data.message;
+          that.snackbarColor = "success";
+          this.clear();
         })
         .catch((err) => {
           console.error(err);
         });
+    },
+
+    clear() {
+      this.service = {
+        icon: "",
+        online: true,
+        name: "",
+        description: "",
+      };
     },
   },
 };

@@ -15,6 +15,11 @@
           <v-toolbar-title>Services</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
+          <template>
+            <v-btn color="primary" class="mb-2" :to="{ name: 'Service/Create' }">
+              Nouveau service
+            </v-btn>
+          </template>
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="headline"
@@ -22,10 +27,8 @@
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm(editedItem)"
-                  >OK</v-btn
-                >
+                <v-btn color="blue darken-1" text @click="closeDelete">Annuler</v-btn>
+                <v-btn color="red darken-1" text @click="confirmDelete"> Supprimer</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -51,8 +54,8 @@
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
-        <v-icon class="mr-2" @click="editItem(item.id)"> mdi-pencil </v-icon>
-        <v-icon @click="deleteItem(item.id)"> mdi-delete </v-icon>
+        <v-icon class="mr-2" @click="editService(item.id)"> mdi-pencil </v-icon>
+        <v-icon @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
   </div>
@@ -63,6 +66,8 @@ export default {
   data() {
     return {
       dialogDelete: false,
+      idToDelete: -1,
+      deletedIndex: -1,
       totalServices: 0,
       services: [],
       loading: true,
@@ -104,12 +109,28 @@ export default {
     this.getDataFromApi();
   },
   methods: {
-    editItem(id) {
+    editService(id) {
       this.$router.push(`/admin/services/edit/${id}`);
     },
-    deleteItem(item) {
-      console.log(item);
+    deleteItem(service) {
+      this.deletedIndex = this.services.indexOf(service);
+      this.idToDelete = service.id;
       this.dialogDelete = true;
+    },
+    confirmDelete() {
+      if (this.idToDelete === -1) return;
+
+      this.services.splice(this.deletedIndex, 1);
+
+      this.$http
+        .delete(`/service/${this.idToDelete}`)
+        .then((res) => {
+          console.log(res);
+          this.dialogDelete = false;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
     closeDelete() {
       this.dialogDelete = false;

@@ -14,5 +14,7 @@ module.exports = app => {
 
     router.post('/', verifyToken, service.addService);
 
+    router.delete('/:id', verifyToken, service.delete);
+
     app.use('/api/service', router);
 }
