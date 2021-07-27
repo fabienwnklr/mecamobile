@@ -1,10 +1,16 @@
+const { verifyToken } = require('../middleware/authJwt');
+
 module.exports = app => {
     const service = require('../controllers/service.controller.js');
     const router = require('express').Router();
 
     router.get('/', service.getAllActifServices);
-    router.get('/admin', service.getAllServices);
+
+    router.get('/admin', verifyToken, service.getAllServices);
+
     router.get('/:id', service.getServiceById);
+
+    router.put('/:id', service.updateService)
 
     app.use('/api/service', router);
 }

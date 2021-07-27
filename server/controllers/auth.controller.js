@@ -28,11 +28,11 @@ exports.login = (req, res) => {
                     id: userFind.id,
                     username: userFind.username,
                     email: userFind.email,
-                    is_admin: userFind.is_admin
-                }
+                };
+
                 jwt.sign({ user: userLogged }, 'secretkey', { expiresIn: '7d' }, (err, token) => {
                     if (err) res.json(err)
-                    res.send({ token: token, user: userLogged }).status(200)
+                    res.status(200).send({ token: token, user: userLogged });
                 })
             } else {
                 res.status(403).send({
@@ -46,4 +46,27 @@ exports.login = (req, res) => {
                 message: 'Erreur de connexion.'
             })
         )
+}
+
+exports.getUser = (req, res) => {
+    const id = req.params.id;
+
+    User.findByPk(id, {
+        attributes: ['username', 'id', 'email', 'createdAt', 'updatedAt']
+    })
+        .then(data => {
+            if (!data) {
+                res.status(400).send({
+                    message: 'Utilisateur inexistant.'
+                });
+                return;
+            }
+            res.status(200).send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                errorThrow: err,
+                message: `Erreur de récupération de l'utilisateur pour id = ${id}`
+            });
+        });
 }

@@ -30,6 +30,8 @@
           <v-col cols="12">
             <quill-editor v-model="service.description"></quill-editor>
           </v-col>
+
+          <v-btn @click="updateService" color="success"> Enregistrer </v-btn>
         </v-row>
       </v-container>
     </v-form>
@@ -56,16 +58,16 @@ export default {
   }),
   methods: {
     checkModif() {
-      return "tyototo";
-      // if (this.cloneService === null) {
-      //   this.cloneService = { ...this.service };
-      // }
-      // if (JSON.stringify(this.cloneService) !== JSON.stringify(this.service)) {
-      //   return "toto";
-      // }
-      // return "tutu";
+      if (this.cloneService === null) {
+        this.cloneService = Object.assign({}, this.service);
+      }
+
+      if (JSON.stringify(this.cloneService) !== JSON.stringify(this.service)) {
+        return "modified";
+      }
+      return "not modified";
     },
-    getDetailsService() {
+    getService() {
       const that = this;
 
       this.$http(`/service/${this.$route.params.id}`)
@@ -74,10 +76,20 @@ export default {
         })
         .catch((err) => console.error(err));
     },
+
+    updateService() {
+      this.$http
+        .put(`/service/${this.$route.params.id}`, this.service)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    },
   },
   created() {
-    this.getDetailsService();
-    window.addEventListener("beforeunload", this.checkModif);
+    this.getService();
   },
 };
 </script>

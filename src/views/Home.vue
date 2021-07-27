@@ -51,9 +51,7 @@
                       </v-card-title>
 
                       <v-card-text>
-                        <div class="text-body-1 py-4">
-                          {{ service.description }}
-                        </div>
+                        <div class="text-body-1 py-4" v-html="service.description"></div>
                       </v-card-text>
                     </v-card>
                   </div>
@@ -131,7 +129,9 @@ export default {
         .then((result) => {
           that.services = result.data;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
   mounted() {

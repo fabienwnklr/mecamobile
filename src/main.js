@@ -17,7 +17,10 @@ Vue.prototype.$http = axios.create({
   }
 });
 
-Vue.config.productionTip = false
+Vue.config.errorHandler = (err) => {
+  alert(err);
+};
+Vue.config.productionTip = false;
 
 new Vue({
   vuetify,

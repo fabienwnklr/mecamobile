@@ -43,7 +43,7 @@ const routes = [
         name: 'Dashboard',
         component: () => import('@/views/admin/Dashboard.vue'),
         meta: {
-          requiresAuth: true, is_admin: true
+          requiresAuth: true
         }
       },
       {
@@ -52,26 +52,19 @@ const routes = [
         component: ListService,
         meta: {
           requiresAuth: true,
-          is_admin: true,
         },
       },
       {
         path: '/admin/services/create',
         name: 'Service/Create',
         component: CreateService,
-        meta: { requiresAuth: true, is_admin: true }
+        meta: { requiresAuth: true }
       },
       {
         path: '/admin/services/edit/:id',
         name: 'Service/Edit',
         component: EditService,
-        meta: { requiresAuth: true, is_admin: true }
-      },
-      {
-        path: '/admin/messages', name: 'Messages', component: () => import('@/views/admin/messages/Messages.vue'),
-        meta: {
-          requiresAuth: true, is_admin: true
-        }
+        meta: { requiresAuth: true }
       },
     ]
   }

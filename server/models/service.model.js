@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         },
         icon: {
-            type: Sequelize.STRING(7),
+            type: Sequelize.STRING(155),
             allowNull: false
         },
         online: {

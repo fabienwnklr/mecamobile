@@ -57,10 +57,6 @@ export default {
         title: "Mes services",
         to: "/admin/services/list",
       },
-      {
-        title: "Mes messages",
-        to: "/admin/messages",
-      },
     ],
   }),
   methods: {

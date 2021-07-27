@@ -15,7 +15,7 @@ exports.getAllServices = (req, res) => {
 }
 
 exports.getAllActifServices = (req, res) => {
-    Service.findAll({ attributes: ['name', 'description'], where: { online: '1' } })
+    Service.findAll({ attributes: ['name', 'description', 'icon'], where: { online: '1' } })
         .then(data => {
             res.send(data).status(200)
         })
@@ -58,7 +58,7 @@ exports.addService = (req, res) => {
     }))
 }
 
-exports.update = (req, res) => {
+exports.updateService = (req, res) => {
     const id = req.params.id;
     const values = req.body;
 
@@ -70,14 +70,14 @@ exports.update = (req, res) => {
             if (num) {
                 res.status(200).send({
                     values,
-                    message: "Saved change(s)",
+                    message: "Modification(s) sauvegardé.",
                 });
             }
         })
         .catch((err) => {
             res.status(500).send({
                 errorThrow: err,
-                message: `An error occured during the modification(s)`,
+                message: `Une erreur est survenue lors de la modification du service ${values.name}`,
             });
         });
 };

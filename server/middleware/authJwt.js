@@ -9,16 +9,17 @@ module.exports.verifyToken = (req, res, next) => {
         const bearerHeader = req.headers['authorization'];
         if (typeof bearerHeader !== 'undefined') {
             const bearer = bearerHeader.split(' ');
-            const bearerToken = bearer[1];
+            const bearerToken = bearer[1].replace(/['"]+/g, '')
             req.token = bearerToken;
+
             jwt.verify(req.token, 'secretkey', (err, user) => {
                 if (err) {
                     if (err instanceof jwt.TokenExpiredError) {
-                        res.status(401).send({
+                        return res.status(401).send({
                             message: 'Connection timed out'
                         })
                     } else {
-                        res.status(401).send({
+                        return res.status(401).send({
                             message: 'Invalid token'
                         })
                     }
@@ -27,7 +28,7 @@ module.exports.verifyToken = (req, res, next) => {
                 next()
             })
         } else {
-            res.status(403).send({
+            return res.status(403).send({
                 message: `No token provided`
             })
         }
