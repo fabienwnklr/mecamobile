@@ -12,5 +12,7 @@ module.exports = app => {
 
     router.put('/:id', service.updateService)
 
+    router.post('/', verifyToken, service.addService);
+
     app.use('/api/service', router);
 }

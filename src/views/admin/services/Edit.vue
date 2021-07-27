@@ -1,6 +1,17 @@
 <template>
   <div>
-    <h1>Modification du service : {{ service.name }}</h1>
+    <h1>
+      <v-icon
+        :title="service.online ? 'Service en ligne' : 'Service hors ligne'"
+        :color="service.online ? 'success' : 'warning'"
+        large
+        >mdi-{{
+          service.online ? "access-point-check" : "access-point-network-off"
+        }}</v-icon
+      >
+      Modification du service :
+      {{ service.name }}
+    </h1>
 
     <v-form v-model="valid" lazy-validation ref="editService" class="mt-5">
       <v-container class="pa-0">
@@ -31,7 +42,9 @@
             <quill-editor v-model="service.description"></quill-editor>
           </v-col>
 
-          <v-btn @click="updateService" color="success"> Enregistrer </v-btn>
+          <v-col class="justify-content-end">
+            <v-btn @click="updateService" color="success"> Enregistrer </v-btn>
+          </v-col>
         </v-row>
       </v-container>
     </v-form>

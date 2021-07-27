@@ -40,6 +40,7 @@ exports.getServiceById = (req, res) => {
 
 exports.addService = (req, res) => {
     const newService = {
+        icon: req.body.name,
         name: req.body.name,
         status: req.body.status,
         description: req.body.description
