@@ -25,7 +25,6 @@
 
           <v-container>
             <v-row>
-              <v-col cols="auto"> </v-col>
               <v-col cols="10" sm="11" md="6" lg="2">
                 <v-text-field
                   :prepend-inner-icon="
@@ -49,11 +48,11 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="auto">
-                <v-checkbox
+                <v-switch
                   v-model="service.online"
-                  color="primary"
-                  :label="`${service.online ? 'Visible' : 'Non visible'}`"
-                ></v-checkbox>
+                  :label="`${service.online ? 'En ligne' : 'Hors ligne'}`"
+                  color="success"
+                ></v-switch>
               </v-col>
             </v-row>
           </v-container>
