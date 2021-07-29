@@ -40,7 +40,7 @@ exports.getServiceById = (req, res) => {
 
 exports.addService = (req, res) => {
     const newService = {
-        icon: req.body.name,
+        icon: 'mdi-' + req.body.icon,
         name: req.body.name,
         status: req.body.status,
         description: req.body.description,
@@ -64,6 +64,10 @@ exports.updateService = (req, res) => {
     const id = req.params.id;
     const values = req.body;
     values.updatedAt = +new Date();
+
+    if (!values.icon.startsWith('mdi-')) {
+        values.icon = 'mdi-' + req.body.icon;
+    }
 
     Service.update(values, {
         where: { id: id },

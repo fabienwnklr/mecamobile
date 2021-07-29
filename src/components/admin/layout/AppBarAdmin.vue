@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app color="primary" dark>
+    <v-navigation-drawer mini v-model="drawerAdmin" app color="primary" dark>
       <v-list nav color="primary">
         <v-list-item
           v-for="(item, i) in btnItems"
@@ -34,7 +34,7 @@
 <script>
 export default {
   data: () => ({
-    drawer: null,
+    drawerAdmin: null,
     btnItems: [
       {
         text: "Retour au site",

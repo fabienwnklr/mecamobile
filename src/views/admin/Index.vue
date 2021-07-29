@@ -1,10 +1,8 @@
 <template>
-  <v-app>
+  <main>
     <AppBarAdmin v-if="$route.name !== 'Login'"></AppBarAdmin>
-    <main>
-      <router-view></router-view>
-    </main>
-  </v-app>
+    <router-view></router-view>
+  </main>
 </template>
 
 <script>

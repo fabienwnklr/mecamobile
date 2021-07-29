@@ -20,16 +20,26 @@
       <v-container class="pa-0">
         <v-row class="justify-content-between">
           <v-col cols="12">
+            <IconHelper></IconHelper>
+          </v-col>
+
+          <v-container>
             <v-row>
-              <v-col cols="2">
+              <v-col cols="auto"> </v-col>
+              <v-col cols="10" sm="11" md="6" lg="2">
                 <v-text-field
+                  :prepend-inner-icon="
+                    service.icon.search('mdi-') === -1
+                      ? 'mdi-' + service.icon
+                      : service.icon
+                  "
                   :rules="rules"
                   outlined
                   v-model="service.icon"
-                  label="icon"
+                  label="Icône"
                 ></v-text-field>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="12" sm="10" md="10" lg="8">
                 <v-text-field
                   outlined
                   v-model="service.name"
@@ -38,7 +48,7 @@
                   :rules="rules"
                 ></v-text-field>
               </v-col>
-              <v-col cols="2" class="">
+              <v-col cols="auto">
                 <v-checkbox
                   v-model="service.online"
                   color="primary"
@@ -46,17 +56,19 @@
                 ></v-checkbox>
               </v-col>
             </v-row>
-          </v-col>
+          </v-container>
+
           <v-col cols="12">
             <quill-editor ref="editEditor" v-model="service.description"></quill-editor>
           </v-col>
-
-          <v-col class="justify-content-end">
-            <v-btn @click="updateService" color="success"> Enregistrer </v-btn>
-          </v-col>
         </v-row>
+
+        <v-col class="justify-content-end">
+          <v-btn @click="updateService" color="success"> Enregistrer </v-btn>
+        </v-col>
       </v-container>
     </v-form>
+
     <v-snackbar top v-model="snackbar" :color="snackbarColor">
       {{ snackbarText }}
 
@@ -80,14 +92,19 @@ export default {
   name: "Edit",
   components: {
     quillEditor,
+    IconHelper: () => import("@/components/admin/IconHelper.vue"),
   },
   data: () => ({
+    dialog: false,
     snackbar: false,
     snackbarText: "",
     snackbarColor: "",
     valid: false,
     changed: false,
-    service: {},
+    service: {
+      online: true,
+      icon: "home",
+    },
     cloneService: null,
     rules: [(v) => !!v || "Champ requis."],
   }),

@@ -19,13 +19,23 @@
       <v-container class="pa-0">
         <v-row class="justify-content-between">
           <v-col cols="12">
+            <IconHelper></IconHelper>
+          </v-col>
+          <v-col cols="auto">
+            <v-icon>
+              {{
+                service.icon.search("mdi-") !== -1 ? service.icon : "mdi-" + service.icon
+              }}
+            </v-icon>
+          </v-col>
+          <v-col cols="12">
             <v-row>
-              <v-col cols="2">
+              <v-col cols="2" md="12">
                 <v-text-field
                   :rules="rules"
                   outlined
                   v-model="service.icon"
-                  label="icon"
+                  label="Icône"
                 ></v-text-field>
               </v-col>
               <v-col cols="6">
@@ -83,6 +93,7 @@ export default {
   name: "Edit",
   components: {
     quillEditor,
+    IconHelper: () => import("@/components/admin/IconHelper.vue"),
   },
   data: () => ({
     snackbar: false,
