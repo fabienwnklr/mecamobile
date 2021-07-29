@@ -73,7 +73,7 @@ export default {
       if (this.valid) {
         this.loading = true;
         this.$http
-          .post("/auth/login", {
+          .post("/user/login", {
             username: this.userName,
             password: this.pass,
           })

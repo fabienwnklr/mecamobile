@@ -8,6 +8,7 @@ import Home from '../views/Home.vue'
 import CreateService from '../views/admin/services/Create.vue'
 import EditService from '../views/admin/services/Edit.vue'
 import ListService from '../views/admin/services/List.vue'
+import Users from '../views/admin/Users.vue'
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,12 @@ const routes = [
         path: '/admin/services/edit/:id',
         name: 'Service/Edit',
         component: EditService,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: '/admin/users/',
+        name: 'Users',
+        component: Users,
         meta: { requiresAuth: true }
       },
     ]

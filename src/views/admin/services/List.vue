@@ -98,7 +98,7 @@ export default {
   watch: {
     options: {
       handler() {
-        this.getDataFromApi();
+        this.getServices();
       },
       deep: true,
     },
@@ -110,7 +110,7 @@ export default {
     },
   },
   mounted() {
-    this.getDataFromApi();
+    this.getServices();
   },
   methods: {
     editService(id) {
@@ -139,7 +139,7 @@ export default {
     closeDelete() {
       this.dialogDelete = false;
     },
-    getDataFromApi() {
+    getServices() {
       this.loading = true;
       this.$http.get("/service/admin").then((res) => {
         this.services = res.data;

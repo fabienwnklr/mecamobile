@@ -59,7 +59,7 @@ export default {
       },
       {
         title: "Utilisateurs",
-        to: "/admin/users/list",
+        to: "/admin/users",
       },
     ],
   }),

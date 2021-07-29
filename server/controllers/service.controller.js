@@ -63,6 +63,7 @@ exports.addService = (req, res) => {
 exports.updateService = (req, res) => {
     const id = req.params.id;
     const values = req.body;
+    values.updatedAt = +new Date();
 
     Service.update(values, {
         where: { id: id },

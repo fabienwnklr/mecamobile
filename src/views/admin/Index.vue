@@ -23,7 +23,7 @@ export default {
             : null;
         const _this = this;
         if (jwt !== null && user !== null) {
-          this.$http(`/auth/${user.id}`)
+          this.$http(`/user/${user.id}`)
             .then(() => {
               _this.$http("/checkToken").catch((err) => {
                 console.error(err);
