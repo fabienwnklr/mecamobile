@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-alert border="left" color="indigo" dark>
-      Pour changer d'icône suivez
+      {{ text }}
       <v-btn class="ml-2" tile @click="dialog = true" outlined small
         >ces instructions</v-btn
       >
@@ -51,6 +51,7 @@
 <script>
 export default {
   name: "IconHelper",
+  props: { text: String },
   data: () => ({
     dialog: false,
   }),

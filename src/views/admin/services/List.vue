@@ -9,6 +9,7 @@
       class="elevation-1"
       :expanded.sync="expanded"
       show-expand
+      dense
     >
       <template v-slot:top>
         <v-toolbar flat>
@@ -56,6 +57,11 @@
       <template v-slot:[`item.description`]="{ item }">
         <span v-html="item.description"></span>
       </template>
+      <template v-slot:[`item.online`]="{ item }">
+        <v-icon :color="item.online ? 'success' : 'red'">
+          {{ item.online ? "mdi-check" : "mdi-close" }}</v-icon
+        >
+      </template>
 
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon class="mr-2" @click="editService(item.id)"> mdi-pencil </v-icon>
@@ -89,7 +95,7 @@ export default {
           align: "start",
           value: "name",
         },
-        { text: "Description", value: "description", html: true },
+        { text: "Description", value: "description" },
         { text: "Actif", value: "online" },
         { text: "Actions ", value: "actions", sortable: false },
       ],

@@ -1,5 +1,6 @@
 <template>
   <main>
+    <BackPrevRoute></BackPrevRoute>
     <AppBarAdmin v-if="$route.name !== 'Login'"></AppBarAdmin>
     <router-view></router-view>
   </main>
@@ -9,6 +10,7 @@
 export default {
   components: {
     AppBarAdmin: () => import("@/components/admin/layout/AppBarAdmin.vue"),
+    BackPrevRoute: () => import("@/components/admin/BackPrevRoute.vue"),
   },
 
   methods: {

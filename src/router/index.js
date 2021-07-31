@@ -42,7 +42,11 @@ const routes = [
       {
         path: '/admin/login',
         name: 'Login',
-        component: () => import('@/views/admin/Login.vue')
+        component: () => import('@/views/admin/Login.vue'),
+        meta: {
+          title: 'Se connecter',
+          guest: true
+        }
       },
       {
         path: '/admin/dashboard',
@@ -104,6 +108,14 @@ router.beforeEach((to, from, next) => {
     } else {
       next();
     }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (localStorage.getItem("jwt") == null) {
+      next();
+    } else {
+      next({
+        name: "Dashboard"
+      });
+    }
   } else {
     next();
   }
@@ -116,7 +128,7 @@ router.afterEach(() => {
 router.afterEach((to) => {
   const currentTitle = document.title;
   const webPageName = currentTitle.split('-')[0];
-  const newTitle = `${webPageName} - ${to.name}`;
+  const newTitle = `${webPageName} - ${to.meta.title}`;
 
   document.title = newTitle;
 })

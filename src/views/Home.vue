@@ -50,9 +50,10 @@
                         {{ service.name }}
                       </v-card-title>
 
-                      <v-card-text>
-                        <div class="text-body-1 py-4" v-html="service.description"></div>
-                      </v-card-text>
+                      <v-card-actions>
+                        <!-- <div class="text-body-1 py-4" v-html="service.description"></div> -->
+                        <v-btn>Voir plus</v-btn>
+                      </v-card-actions>
                     </v-card>
                   </div>
                 </v-hover>
@@ -72,49 +73,41 @@ export default {
     services: [
       {
         name: "Pneus",
-        description: "lorem ipsum",
         to: "/services#pneus",
         icon: "mdi-car-tire-alert",
       },
       {
         name: "Freins",
-        description: "lorem ipsum",
         to: "/services#freins",
         icon: "mdi-car-brake-alert",
       },
       {
         name: "Révisions",
-        description: "lorem ipsum",
         to: "/services#revisions",
         icon: "mdi-oil",
       },
       {
         name: "Diagnostique",
-        description: "lorem ipsum",
         to: "/services#diagnostique",
         icon: "mdi-engine",
       },
       {
         name: "Eléctronique",
-        description: "lorem ipsum",
         to: "/services#electronique",
         icon: "mdi-flash",
       },
       {
         name: "Mécanique",
-        description: "lorem ipsum",
         to: "/services#mecanique",
         icon: "mdi-engine",
       },
       {
         name: "Rénovation optique",
-        description: "lorem ipsum",
         to: "/services#renovations-optique",
         icon: "mdi-car-parking-lights",
       },
       {
         name: "Décalaminage",
-        description: "lorem ipsum",
         to: "/services#decalaminage",
         icon: "mdi-nuke",
       },

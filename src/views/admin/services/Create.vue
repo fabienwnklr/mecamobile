@@ -19,7 +19,7 @@
       <v-container class="pa-0">
         <v-row class="justify-content-between">
           <v-col cols="12">
-            <IconHelper></IconHelper>
+            <IconHelper text="Pour choisir une icône, suivez"></IconHelper>
           </v-col>
           <v-col cols="auto">
             <v-icon>

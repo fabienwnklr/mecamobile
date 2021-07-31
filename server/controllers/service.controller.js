@@ -15,7 +15,7 @@ exports.getAllServices = (req, res) => {
 }
 
 exports.getAllActifServices = (req, res) => {
-    Service.findAll({ attributes: ['name', 'description', 'icon'], where: { online: '1' } })
+    Service.findAll({ attributes: ['name', 'icon'], where: { online: '1' } })
         .then(data => {
             res.send(data).status(200)
         })
