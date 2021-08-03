@@ -54,6 +54,11 @@
         </td>
       </template>
 
+      <template v-slot:[`item.icon`]="{ item }">
+        <span>
+          <v-icon>{{ item.icon }}</v-icon>
+        </span>
+      </template>
       <template v-slot:[`item.description`]="{ item }">
         <span v-html="item.description"></span>
       </template>

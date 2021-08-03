@@ -8,7 +8,7 @@
       </v-container>
     </v-main>
 
-    <Footer v-if="this.$route.path.match('admin') === null"></Footer>
+    <!-- <Footer v-if="this.$route.path.match('admin') === null"></Footer> -->
   </v-app>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 
   components: {
     AppBar: () => import("@/components/layout/Appbar.vue"),
-    Footer: () => import("@/components/layout/Footer.vue"),
+    // Footer: () => import("@/components/layout/Footer.vue"),
   },
 };
 </script>

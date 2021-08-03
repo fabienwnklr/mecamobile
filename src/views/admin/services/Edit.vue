@@ -129,8 +129,6 @@ export default {
     updateService() {
       this.valid = this.$refs.editService.validate();
 
-      if (!this.isModified() || !this.valid) return;
-
       if (["", "\n"].includes(this.$refs.editEditor.quill.getText())) {
         this.snackbar = true;
         this.snackbarText = "Une déscription est requise.";

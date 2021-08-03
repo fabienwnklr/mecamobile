@@ -5,21 +5,17 @@
         <div>
           <div>
             <div>
-              <h2 class="text-h4 font-weight-bold">Services</h2>
+              <h2 class="text-h4 font-weight-bold">Service</h2>
 
-              <h4 class="text-h6">Voici tous nos services détaillés.</h4>
+              <h4 class="text-h6">Détail du service : {{ service.name }}.</h4>
             </div>
 
             <v-divider class="my-4"></v-divider>
 
             <v-row>
-              <v-col cols="12" md="6" lg="4" v-for="(service, i) in services" :key="i">
+              <v-col cols="12">
                 <div>
-                  <v-card
-                    outlined
-                    :to="`services/${service.link}`"
-                    :title="`Afficher les détail du service : ${service.name}`"
-                  >
+                  <v-card outlined>
                     <v-card-title class="light">
                       <v-btn color="accent"
                         ><v-icon>{{ service.icon }}</v-icon></v-btn
@@ -50,16 +46,16 @@
 export default {
   name: "Services",
   data: () => ({
-    services: [],
+    service: [],
   }),
   methods: {
     getServices() {
       const that = this;
 
       this.$http
-        .get("/service/full")
+        .get("/service/" + this.$route.params.name)
         .then((result) => {
-          that.services = result.data;
+          that.service = result.data;
         })
         .catch((error) => {
           console.error(error);

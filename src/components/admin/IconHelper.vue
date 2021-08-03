@@ -35,7 +35,9 @@
 
           <v-divider></v-divider>
 
-          <p class="text-h6 my-3">Puis enfin renseignez le nom de l'icône :</p>
+          <p class="text-h6 my-3">
+            Puis enfin renseignez le nom de l'icône : ici <code>cryengine</code>
+          </p>
           <v-img class="mb-3" src="@/assets/mtd-icons-save.png"></v-img>
         </v-card-text>
         <v-divider></v-divider>

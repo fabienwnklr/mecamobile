@@ -14,8 +14,21 @@ exports.getAllServices = (req, res) => {
         )
 }
 
-exports.getAllActifServices = (req, res) => {
-    Service.findAll({ attributes: ['name', 'icon'], where: { online: '1' } })
+exports.getServicesHomePage = (req, res) => {
+    Service.findAll({ attributes: ['name', 'icon', 'link'], where: { online: '1' } })
+        .then(data => {
+            res.send(data).status(200)
+        })
+        .catch(err =>
+            res.status(500).send({
+                errorThrow: err.message,
+                message: 'Erreur lors de la récupération des services.'
+            })
+        )
+}
+
+exports.getServicesFull = (req, res) => {
+    Service.findAll({ attributes: ['name', 'icon', 'description', 'link'], where: { online: '1' } })
         .then(data => {
             res.send(data).status(200)
         })
@@ -30,6 +43,11 @@ exports.getAllActifServices = (req, res) => {
 exports.getServiceById = (req, res) => {
     const id = req.params.id;
 
+    if (isNaN(parseInt(id, 10))) {
+        this.getServiceByLinkName(req, res);
+        return;
+    }
+
     Service.findByPk(id).then(data =>
         res.send(data)
     ).catch(err => res.status(500).send({
@@ -38,13 +56,28 @@ exports.getServiceById = (req, res) => {
     }))
 }
 
+exports.getServiceByLinkName = (req, res) => {
+    const link = req.params.id;
+
+    Service.findOne({ where: { link: link } }).then(data =>
+        res.send(data)
+    ).catch(err => res.status(500).send({
+        errorThrow: err.message,
+        message: 'Erreur lors de la récupération du service.'
+    }))
+}
+
 exports.addService = (req, res) => {
+    // on créer l'ancre par rapport au nom du service
+    const link = req.body.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ', '_').toLowerCase();
+
     const newService = {
         icon: 'mdi-' + req.body.icon,
         name: req.body.name,
         status: req.body.status,
         description: req.body.description,
-        createdBy: req.body.creator
+        createdBy: req.body.creator,
+        link
     };
 
     Service.create(newService).then(data => {
@@ -63,6 +96,13 @@ exports.addService = (req, res) => {
 exports.updateService = (req, res) => {
     const id = req.params.id;
     const values = req.body;
+
+    // on créer l'ancre par rapport au nom du service
+    const link = values.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ', '_').toLowerCase();
+
+    console.log(link);
+
+    values.link = link;
     values.updatedAt = +new Date();
 
     if (!values.icon.startsWith('mdi-')) {

@@ -27,33 +27,36 @@
     </div>
 
     <v-row>
-      <v-col cols="12" lg="12" xl="12">
+      <v-col cols="12">
         <div>
           <div class="pt-16">
             <h2 class="text-h4 font-weight-bold pb-4">Présentation de nos services</h2>
 
-            <v-row>
-              <v-col cols="12" md="6" lg="4" v-for="(service, i) in services" :key="i">
+            <v-row class="mt-2">
+              <v-col
+                cols="6"
+                sm="4"
+                md="4"
+                lg="2"
+                v-for="(service, i) in services"
+                :key="i"
+              >
                 <v-hover v-slot:default="{ hover }" open-delay="50" close-delay="50">
                   <div>
                     <v-card
                       flat
                       :color="hover ? 'white' : 'transparent'"
-                      :elevation="hover ? 12 : 2"
+                      :elevation="hover ? 12 : 0"
                       hover
-                      :to="service.to"
+                      :to="`service/${service.link}`"
+                      class="justify-center"
                     >
-                      <v-card-title class="text-h5">
+                      <v-card-title class="text-h5 justify-center flex-column">
                         <v-icon color="red" class="black rounded-circle py-2 px-2 mr-2">{{
                           service.icon
                         }}</v-icon>
-                        {{ service.name }}
+                        <span class="pt-2">{{ service.name }}</span>
                       </v-card-title>
-
-                      <v-card-actions>
-                        <!-- <div class="text-body-1 py-4" v-html="service.description"></div> -->
-                        <v-btn>Voir plus</v-btn>
-                      </v-card-actions>
                     </v-card>
                   </div>
                 </v-hover>

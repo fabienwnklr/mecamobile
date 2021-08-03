@@ -17,9 +17,6 @@ Vue.prototype.$http = axios.create({
   }
 });
 
-Vue.config.errorHandler = (err) => {
-  alert(err);
-};
 Vue.config.productionTip = false;
 
 new Vue({

@@ -21,17 +21,15 @@
           <v-col cols="12">
             <IconHelper text="Pour choisir une icône, suivez"></IconHelper>
           </v-col>
-          <v-col cols="auto">
-            <v-icon>
-              {{
-                service.icon.search("mdi-") !== -1 ? service.icon : "mdi-" + service.icon
-              }}
-            </v-icon>
-          </v-col>
           <v-col cols="12">
             <v-row>
-              <v-col cols="2" md="12">
+              <v-col cols="10" sm="11" md="6" lg="2">
                 <v-text-field
+                  :prepend-inner-icon="
+                    service.icon.search('mdi-') === -1
+                      ? 'mdi-' + service.icon
+                      : service.icon
+                  "
                   :rules="rules"
                   outlined
                   v-model="service.icon"
@@ -47,12 +45,12 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="2" class="">
-                <v-checkbox
+              <v-col cols="auto">
+                <v-switch
                   v-model="service.online"
-                  color="primary"
-                  :label="`${service.online ? 'Visible' : 'Non visible'}`"
-                ></v-checkbox>
+                  :label="`${service.online ? 'En ligne' : 'Hors ligne'}`"
+                  color="success"
+                ></v-switch>
               </v-col>
             </v-row>
           </v-col>

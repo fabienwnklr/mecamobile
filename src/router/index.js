@@ -16,22 +16,33 @@ const routes = [
   {
     path: "*",
     name: "NotFound",
-    component: () => import("@/views/error/404.vue")
+    component: () => import("@/views/error/404.vue"),
+    meta: { title: 'Erreur' }
   },
   {
     path: '/',
     name: 'Accueil',
-    component: Home
+    component: Home,
+    meta: { title: 'Accueil' }
   },
   {
     path: '/services',
     name: 'Services',
     component: () => import("@/views/Services.vue"),
+    meta: { title: 'Services' }
+  },
+  {
+    path: '/services/:name',
+    name: 'Service/Details',
+    component: () => import("@/views/Details.vue"),
+    props: true,
+    meta: { title: 'Détails' }
   },
   {
     path: '/contact',
     name: 'Contact',
     component: () => import("@/views/Contact.vue"),
+    meta: { title: 'Contact' }
   },
   {
     path: '/admin',
@@ -53,6 +64,7 @@ const routes = [
         name: 'Dashboard',
         component: () => import('@/views/admin/Dashboard.vue'),
         meta: {
+          title: 'Tableau de bord',
           requiresAuth: true
         }
       },
@@ -61,6 +73,7 @@ const routes = [
         name: 'Services/List',
         component: ListService,
         meta: {
+          title: 'Services',
           requiresAuth: true,
         },
       },
@@ -68,19 +81,19 @@ const routes = [
         path: '/admin/services/create',
         name: 'Service/Create',
         component: CreateService,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true, title: 'Nouveau service', }
       },
       {
         path: '/admin/services/edit/:id',
         name: 'Service/Edit',
         component: EditService,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true, title: 'Modification', }
       },
       {
         path: '/admin/users/',
         name: 'Users',
         component: Users,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true, title: 'Utilisateurs', }
       },
     ]
   }
