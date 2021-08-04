@@ -23,11 +23,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING(255),
             allowNull: false
         },
-        visible: {
-            type: Sequelize.STRING(50),
-            defaultValue: false,
-            allowNull: false
-        },
         createdBy: {
             type: Sequelize.STRING(100),
             allowNull: true

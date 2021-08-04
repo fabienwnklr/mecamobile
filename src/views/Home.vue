@@ -35,9 +35,9 @@
             <v-row class="mt-2">
               <v-col
                 cols="6"
-                sm="4"
-                md="4"
-                lg="2"
+                sm="5"
+                md="5"
+                lg="3"
                 v-for="(service, i) in services"
                 :key="i"
               >
@@ -48,7 +48,7 @@
                       :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
-                      :to="`service/${service.link}`"
+                      :to="`services/${service.link}`"
                       class="justify-center"
                     >
                       <v-card-title class="text-h5 justify-center flex-column">
