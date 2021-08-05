@@ -18,7 +18,7 @@ export default {
 
   components: {
     AppBar: () => import("@/components/layout/Appbar.vue"),
-    Footer: () => import("@/components/layout/Footer.vue"),
+    Footer: () => import("@/components/layout/footer.vue"),
   },
 };
 </script>
