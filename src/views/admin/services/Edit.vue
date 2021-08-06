@@ -58,8 +58,9 @@
           </v-container>
 
           <v-col cols="12">
-            <quill-editor ref="editEditor" v-model="service.description"></quill-editor>
+            <tiptap-vuetify ref="editorService" v-model="service.description" :extensions="extensions" />
           </v-col>
+          
         </v-row>
 
         <v-col class="justify-content-end">
@@ -81,16 +82,29 @@
 </template>
 
 <script>
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
-
-import { quillEditor } from "vue-quill-editor";
+import {
+  TiptapVuetify,
+  Heading,
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Code,
+  Paragraph,
+  BulletList,
+  OrderedList,
+  ListItem,
+  Link,
+  Blockquote,
+  HardBreak,
+  HorizontalRule,
+  History,
+} from "tiptap-vuetify";
 
 export default {
   name: "Edit",
   components: {
-    quillEditor,
+    TiptapVuetify,
     IconHelper: () => import("@/components/admin/IconHelper.vue"),
   },
   data: () => ({
@@ -106,6 +120,30 @@ export default {
     },
     cloneService: null,
     rules: [(v) => !!v || "Champ requis."],
+    extensions: [
+      History,
+      Blockquote,
+      Link,
+      Underline,
+      Strike,
+      Italic,
+      ListItem,
+      BulletList,
+      OrderedList,
+      [
+        Heading,
+        {
+          options: {
+            levels: [1, 2, 3],
+          },
+        },
+      ],
+      Bold,
+      Code,
+      HorizontalRule,
+      Paragraph,
+      HardBreak,
+    ],
   }),
   methods: {
     isModified() {
@@ -129,7 +167,7 @@ export default {
     updateService() {
       this.valid = this.$refs.editService.validate();
 
-      if (["", "\n"].includes(this.$refs.editEditor.quill.getText())) {
+      if (["", "\n"].includes(this.$refs.editorService.editor.getHTML())) {
         this.snackbar = true;
         this.snackbarText = "Une déscription est requise.";
         this.snackbarColor = "red";

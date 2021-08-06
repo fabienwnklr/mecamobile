@@ -21,8 +21,8 @@
     "nodemailer": "^6.6.2",
     "nprogress": "^0.2.0",
     "sequelize": "^6.6.5",
+    "tiptap-vuetify": "^2.24.0",
     "vue": "^2.6.11",
-    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.2.0",
     "vuetify": "^2.5.0"
   },
