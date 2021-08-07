@@ -100,7 +100,6 @@ exports.updateService = (req, res) => {
     // on créer l'ancre par rapport au nom du service
     const link = values.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ', '_').toLowerCase();
 
-    console.log(link);
 
     values.link = link;
     values.updatedAt = +new Date();

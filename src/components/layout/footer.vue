@@ -94,7 +94,7 @@
 
 <script>
 export default {
-  name: 'footer',
+  name: "Footer",
   data: () => ({
     heroui: [
       {

@@ -1,52 +1,75 @@
 <template>
-  <div class="mt-4">
+  <v-card>
     <v-data-table
+      :search="search"
       :headers="headers"
       :items="services"
-      :options.sync="options"
-      :server-items-length="totalServices"
+      :options="options"
       :loading="loading"
       class="elevation-1"
-      :expanded.sync="expanded"
+      :expanded="expanded"
       show-expand
       dense
     >
       <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>Services</v-toolbar-title>
+        <!-- <v-toolbar-title>Services</v-toolbar-title> -->
+        <!-- <v-divider class="mx-4" inset vertical></v-divider> -->
+        <!-- <v-spacer></v-spacer> -->
+        <v-card-title>
+          <h1 class="text-h6">Services</h1>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
+          <template>
+            <v-text-field v-model="search" label="Recherche" class=""></v-text-field>
+          </template>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <!-- <v-spacer></v-spacer> -->
           <template>
             <v-btn color="primary" class="mb-2" :to="{ name: 'Service/Create' }">
               Nouveau service
             </v-btn>
           </template>
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="headline"
-                >Are you sure you want to delete this item?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">Annuler</v-btn>
-                <v-btn color="red darken-1" text @click="confirmDelete"> Supprimer</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar>
+        </v-card-title>
+        <v-dialog v-model="dialogDelete" max-width="500px">
+          <v-card>
+            <v-card-title class="headline"
+              >Are you sure you want to delete this item?</v-card-title
+            >
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="closeDelete">Annuler</v-btn>
+              <v-btn color="red darken-1" text @click="confirmDelete"> Supprimer</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </template>
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">
           <ul>
             <li>
               Créer par {{ item.createdBy }} le
-              {{ new Date(item.createdAt).toLocaleString() }}
+              {{
+                new Date(item.createdAt).toLocaleDateString("fr", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })
+              }}
+              à
+              {{ new Date(item.createdAt).toLocaleTimeString("fr") }}
             </li>
             <li>
               <span v-if="item.updatedAt && item.updatedBy">
                 Dernière modification par {{ item.updatedBy }} le
-                {{ new Date(item.updatedAt).toLocaleString() }}
+                {{
+                  new Date(item.updatedAt).toLocaleDateString("fr", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })
+                }}
+                à
+                {{ new Date(item.updatedAt).toLocaleTimeString("fr") }}
               </span>
               <span v-else>Aucune modification depuis la création.</span>
             </li>
@@ -73,13 +96,14 @@
         <v-icon @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
-  </div>
+  </v-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      search: "",
       dialogDelete: false,
       idToDelete: -1,
       deletedIndex: -1,
@@ -89,11 +113,6 @@ export default {
       options: {},
       expanded: [],
       headers: [
-        {
-          text: "Identifiant",
-          align: "start",
-          value: "id",
-        },
         { text: "Icon", value: "icon", sortable: false },
         {
           text: "Nom du service",
@@ -107,12 +126,6 @@ export default {
     };
   },
   watch: {
-    options: {
-      handler() {
-        this.getServices();
-      },
-      deep: true,
-    },
     dialog(val) {
       val || this.close();
     },

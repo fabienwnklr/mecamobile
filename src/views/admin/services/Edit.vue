@@ -58,9 +58,12 @@
           </v-container>
 
           <v-col cols="12">
-            <tiptap-vuetify ref="editorService" v-model="service.description" :extensions="extensions" />
+            <tiptap-vuetify
+              ref="editorService"
+              v-model="service.description"
+              :extensions="extensions"
+            />
           </v-col>
-          
         </v-row>
 
         <v-col class="justify-content-end">
@@ -174,12 +177,13 @@ export default {
         return;
       }
 
+      this.service.updatedBy = JSON.parse(localStorage.getItem("user")).username;
+
       const that = this;
 
       this.$http
         .put(`/service/${this.$route.params.id}`, this.service)
         .then((res) => {
-          console.log(res);
           that.snackbar = true;
           that.snackbarText = res.data.message;
           that.snackbarColor = "success";

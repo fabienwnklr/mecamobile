@@ -2,6 +2,7 @@ import '@mdi/font/css/materialdesignicons.css'
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib';
 import colors from 'vuetify/lib/util/colors'
+import fr from 'vuetify/lib/locale/fr'
 
 Vue.use(Vuetify);
 
@@ -13,6 +14,10 @@ import 'tiptap-vuetify/dist/main.css'
 import 'vuetify/dist/vuetify.min.css'
 
 const vuetify = new Vuetify({
+  lang: {
+    locales: { fr },
+    current: 'fr'
+  },
   theme: {
     options: {
       customProperties: true,
