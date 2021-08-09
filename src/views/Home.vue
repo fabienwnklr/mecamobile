@@ -39,7 +39,7 @@
               Présentation de nos services
             </h2>
 
-            <v-row class="mt-2">
+            <v-row class="mt-2" v-if="dataLoaded">
               <v-col
                 cols="6"
                 sm="6"
@@ -70,6 +70,12 @@
                 </v-hover>
               </v-col>
             </v-row>
+            <v-row class="mt-2" v-else>
+              <v-col cols="6" sm="6" md="4" lg="3" v-for="(service, i) in 8" :key="i">
+                <v-skeleton-loader type="avatar"></v-skeleton-loader>
+                <v-skeleton-loader width="200" type="list-item"></v-skeleton-loader>
+              </v-col>
+            </v-row>
           </div>
         </div>
       </v-col>
@@ -81,6 +87,7 @@
 export default {
   name: "Home",
   data: () => ({
+    dataLoaded: false,
     services: [
       {
         name: "Pneus",
@@ -132,6 +139,7 @@ export default {
         .get("/service")
         .then((result) => {
           that.services = result.data;
+          that.dataLoaded = true;
         })
         .catch((error) => {
           console.error(error);
@@ -143,3 +151,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.v-skeleton-loader__avatar,
+.v-skeleton-loader.v-skeleton-loader--is-loading {
+  margin: 0 auto;
+}
+</style>

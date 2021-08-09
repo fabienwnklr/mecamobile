@@ -22,11 +22,6 @@
                       >
                       <h2 class="text-h5 ml-2">{{ service.name }}</h2>
                     </v-card-title>
-                    <!-- <v-card-text>
-                        <v-btn color="accent"
-                          ><v-icon>{{ service.icon }}</v-icon></v-btn
-                        >
-                      </v-card-text> -->
 
                     <v-card-text>
                       <div class="text-body-1 py-4" v-html="service.description"></div>

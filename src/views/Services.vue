@@ -12,7 +12,7 @@
 
             <v-divider class="my-4"></v-divider>
 
-            <v-row>
+            <v-row v-if="dataLoaded">
               <v-col cols="12" md="6" lg="4" v-for="(service, i) in services" :key="i">
                 <div>
                   <v-card
@@ -26,17 +26,20 @@
                       >
                       <h2 class="text-h5 ml-2">{{ service.name }}</h2>
                     </v-card-title>
-                    <!-- <v-card-text>
-                        <v-btn color="accent"
-                          ><v-icon>{{ service.icon }}</v-icon></v-btn
-                        >
-                      </v-card-text> -->
 
                     <v-card-text>
                       <div class="text-body-1 py-4" v-html="service.description"></div>
                     </v-card-text>
                   </v-card>
                 </div>
+              </v-col>
+            </v-row>
+            <v-row v-else>
+              <v-col cols="12" md="6" lg="4" v-for="(service, i) in 8" :key="i">
+                <v-skeleton-loader
+                  v-bind="attrs"
+                  type="card-heading, list-item-two-line ,list-item-three-line, list-item-three-line, list-item-three-line "
+                ></v-skeleton-loader>
               </v-col>
             </v-row>
           </div>
@@ -50,7 +53,13 @@
 export default {
   name: "Services",
   data: () => ({
+    dataLoaded: false,
     services: [],
+    attrs: {
+      class: "mb-6",
+      boilerplate: true,
+      elevation: 2,
+    },
   }),
   methods: {
     getServices() {
@@ -60,6 +69,7 @@ export default {
         .get("/service/full")
         .then((result) => {
           that.services = result.data;
+          that.dataLoaded = true;
         })
         .catch((error) => {
           console.error(error);

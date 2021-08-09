@@ -43,14 +43,14 @@
           v-model="fullName"
           :rules="fullNameRules"
           type="text"
-          label="Nom et prénom"
+          label="*Nom et prénom"
           outlined
         ></v-text-field>
         <v-text-field
           v-model="email"
           :rules="emailRules"
           type="email"
-          label="E-mail"
+          label="*E-mail"
           outlined
         ></v-text-field>
         <v-text-field
@@ -62,7 +62,6 @@
         ></v-text-field>
         <v-text-field
           v-model="adress"
-          :rules="(v) => !!v || 'Champ requis'"
           type="text"
           label="Adresse (rue)"
           outlined
@@ -74,15 +73,15 @@
           label="Code postale"
           outlined
         ></v-text-field>
-        <v-text-field v-model="brand" type="text" label="Marque" outlined></v-text-field>
-        <v-text-field v-model="model" type="text" label="Modèle" outlined></v-text-field>
+        <v-text-field v-model="brand" type="text" label="*Marque" outlined></v-text-field>
+        <v-text-field v-model="model" type="text" label="*Modèle" outlined></v-text-field>
         <v-text-field
           v-model="model"
           type="text"
-          label="Immatriculation"
+          label="*Immatriculation"
           outlined
         ></v-text-field>
-        <v-textarea v-model="model" label="Message" outlined></v-textarea>
+        <v-textarea v-model="message" label="*Message" outlined></v-textarea>
 
         <v-btn color="primary" class="text-right" @click="submit"> Envoyer </v-btn>
       </v-form>
@@ -100,6 +99,10 @@ export default {
     phoneNumber: "",
     adress: "",
     city: "",
+    zip: "",
+    brand: "",
+    model: "",
+    message: "",
     select: null,
     checkbox: null,
     fullNameRules: [(v) => !!v || "Nom et prénom requis."],
