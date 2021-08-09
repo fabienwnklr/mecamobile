@@ -1,27 +1,19 @@
 <template>
   <div>
-    <v-navigation-drawer mini v-model="drawerAdmin" app color="primary" dark>
+    <v-navigation-drawer
+      clipped
+      permanent
+      v-model="drawerAdmin"
+      :mini-variant="$vuetify.breakpoint.mdAndDown"
+      app
+      color="primary"
+      dark
+    >
       <v-list nav color="primary">
-        <v-list-item
-          v-for="(item, i) in btnItems"
-          :key="i + 100"
-          link
-          :to="item.to"
-          :href="item.href"
-          :target="item.target"
-        >
-          <v-list-item-content>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item
-          v-for="(item, i) in barItems"
-          :key="i"
-          link
-          :to="item.to"
-          :href="item.href"
-          :target="item.target"
-        >
+        <v-list-item v-for="(item, i) in navAdmin" :key="i + 100" :to="item.to">
+          <v-list-item-action>
+            <v-icon>mdi-{{ item.icon }} </v-icon>
+          </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
@@ -34,32 +26,37 @@
 <script>
 export default {
   data: () => ({
-    drawerAdmin: null,
-    btnItems: [
+    drawerAdmin: true,
+    navAdmin: [
       {
-        text: "Retour au site",
+        title: "Retour au site",
         to: "/",
-        target: "",
-        color: "primary",
-        icon: "mdi-arrow-left",
+        icon: "home",
       },
-    ],
-    barItems: [
       {
         title: "Tableau de bord",
         to: "/admin/dashboard",
+        icon: "view-dashboard",
       },
       {
         title: "Créer un service",
         to: "/admin/services/create",
+        icon: "newspaper-plus",
       },
       {
         title: "Mes services",
         to: "/admin/services/list",
+        icon: "clipboard-list-outline",
       },
       {
         title: "Utilisateurs",
         to: "/admin/users",
+        icon: "account-group-outline",
+      },
+      {
+        title: "Se déconnecter",
+        to: "#",
+        icon: "logout",
       },
     ],
   }),

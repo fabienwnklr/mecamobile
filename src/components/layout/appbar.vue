@@ -37,7 +37,10 @@
     </v-navigation-drawer>
 
     <v-app-bar app :clipped-left="$vuetify.breakpoint.lgAndUp">
-      <v-container :class="{ 'px-0': !$vuetify.breakpoint.smAndUp }">
+      <v-container
+        :fluid="$vuetify.breakpoint.mdAndDown"
+        :class="{ 'px-0': !$vuetify.breakpoint.smAndUp }"
+      >
         <v-row
           align="center"
           justify="space-between"
@@ -58,7 +61,7 @@
             </v-toolbar-title>
           </v-col>
 
-          <v-col v-if="$vuetify.breakpoint.smAndUp">
+          <v-col v-if="$vuetify.breakpoint.lgAndUp">
             <v-btn
               v-for="(item, i) in barItems"
               :key="i"

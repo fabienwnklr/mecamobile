@@ -1,6 +1,6 @@
 <template>
   <main>
-    <BackPrevRoute></BackPrevRoute>
+    <BackPrevRoute v-if="$vuetify.breakpoint.lgAndUp"></BackPrevRoute>
     <AppBarAdmin v-if="$route.name !== 'Login'"></AppBarAdmin>
     <router-view></router-view>
   </main>

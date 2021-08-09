@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>tutu</h1>
-    <h2>tototo</h2>
-  </div>
+  <h1>Tableau de bord</h1>
 </template>
 
 <script>

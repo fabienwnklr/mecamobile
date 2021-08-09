@@ -3,7 +3,7 @@
     <AppBar v-if="this.$route.path.match('admin') === null"></AppBar>
 
     <v-main>
-      <v-container>
+      <v-container :fluid="$vuetify.breakpoint.mdAndDown">
         <router-view></router-view>
       </v-container>
     </v-main>

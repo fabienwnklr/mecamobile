@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-card>
     <v-data-table
       locale="fr-FR"
       :headers="headers"
@@ -8,14 +8,22 @@
       sort-by="username"
       class="elevation-1"
       :search="search"
-      :expanded.sync="expanded"
+      :expanded="expanded"
       show-expand
+      dense
     >
       <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>Utilisateurs</v-toolbar-title>
+        <v-card-title>
+          <h1 class="text-h6">Utilisateurs</h1>
           <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
+          <v-text-field
+            append-icon="mdi-magnify"
+            v-model="search"
+            label="Rechercher"
+            class="mx-4"
+            single-line
+            hide-details
+          ></v-text-field>
           <v-dialog v-model="dialog" max-width="500px">
             <v-form ref="userEdit">
               <!-- <template v-slot:activator="{ on, attrs }">
@@ -90,15 +98,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-        </v-toolbar>
-        <v-text-field
-          append-icon="mdi-magnify"
-          v-model="search"
-          label="Rechercher"
-          class="mx-4"
-          single-line
-          hide-details
-        ></v-text-field>
+        </v-card-title>
       </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
@@ -143,7 +143,7 @@
         </v-btn>
       </template>
     </v-snackbar>
-  </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -160,11 +160,6 @@ export default {
     dialogDelete: false,
     expanded: [],
     headers: [
-      {
-        text: "Idetifiant",
-        align: "start",
-        value: "id",
-      },
       {
         text: "Nom d'utilisateur",
         align: "start",

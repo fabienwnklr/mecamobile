@@ -10,15 +10,17 @@
           <v-card-text class="fill-height d-flex align-end">
             <v-row class="flex-column rounded">
               <v-col cols="12" md="10" lg="8" xl="7">
-                <h1 class="text-h3 py-3 light--text">
+                <h1 class="text-h3 py-3 light--text text-h4">
                   MECAMOBILE 40 Entretien, diagnostic et réparations automobile à domicile
                 </h1>
               </v-col>
               <v-col class="d-flex align-center">
-                <v-btn color="accent bg-light mr-2" href="tel:123-456-7890">
+                <v-btn color="accent bg-light mr-2 text-caption" href="tel:123-456-7890">
                   Appeler
                 </v-btn>
-                <v-btn color="accent bg-light" to="contact"> Envoyer un email </v-btn>
+                <v-btn color="accent bg-light text-caption" to="contact">
+                  Envoyer un email
+                </v-btn>
               </v-col>
             </v-row>
           </v-card-text>
@@ -30,13 +32,15 @@
       <v-col cols="12">
         <div>
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold pb-4">Présentation de nos services</h2>
+            <h2 class="text-h4 font-weight-bold pb-4 text-h5">
+              Présentation de nos services
+            </h2>
 
             <v-row class="mt-2">
               <v-col
                 cols="6"
-                sm="5"
-                md="5"
+                sm="6"
+                md="4"
                 lg="3"
                 v-for="(service, i) in services"
                 :key="i"
@@ -45,17 +49,18 @@
                   <div>
                     <v-card
                       flat
-                      :color="hover ? 'white' : 'transparent'"
                       :elevation="hover ? 12 : 0"
                       hover
                       :to="`services/${service.link}`"
                       class="justify-center"
                     >
                       <v-card-title class="text-h5 justify-center flex-column">
-                        <v-icon color="red" class="black rounded-circle py-2 px-2 mr-2">{{
+                        <v-icon color="red" class="black rounded-circle py-2 px-2">{{
                           service.icon
                         }}</v-icon>
-                        <span class="pt-2">{{ service.name }}</span>
+                        <span class="pt-2 text-body-2 text-sm-h5">{{
+                          service.name
+                        }}</span>
                       </v-card-title>
                     </v-card>
                   </div>
