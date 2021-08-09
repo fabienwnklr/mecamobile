@@ -15,10 +15,13 @@
                 </h1>
               </v-col>
               <v-col class="d-flex align-center">
-                <v-btn color="accent bg-light mr-2 text-caption" href="tel:123-456-7890">
+                <v-btn
+                  color="accent bg-light mr-2 text-caption text-md-button"
+                  href="tel:123-456-7890"
+                >
                   Appeler
                 </v-btn>
-                <v-btn color="accent bg-light text-caption" to="contact">
+                <v-btn color="accent bg-light text-caption text-md-button" to="contact">
                   Envoyer un email
                 </v-btn>
               </v-col>
@@ -32,7 +35,7 @@
       <v-col cols="12">
         <div>
           <div class="pt-16">
-            <h2 class="text-h4 font-weight-bold pb-4 text-h5">
+            <h2 class="text-md-h4 font-weight-bold pb-4 text-h5">
               Présentation de nos services
             </h2>
 

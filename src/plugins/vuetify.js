@@ -27,7 +27,9 @@ const vuetify = new Vuetify({
         primary: colors.shades.black,
         secondary: '#818383',
         accent: '#2178ff',
-        light: colors.grey.lighten4
+        light: colors.grey.lighten4,
+        light2: colors.grey.lighten3,
+        light3: colors.grey.lighten2
       },
     },
   },
