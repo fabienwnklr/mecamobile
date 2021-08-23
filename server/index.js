@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const port = 3000;
 const app = express();
 const cors = require("cors");
+const send = require('./mailer');
 
 // Security
 app.use(helmet());
@@ -28,6 +29,11 @@ app.get("/api/checkToken", authJwt.verifyToken, (req, res) => {
         message: "Valid token",
     });
 });
+
+app.post('/api/contact', (req, res) => {
+    send(req, res);
+});
+
 require("./routes/user.routes")(app);
 require("./routes/service.routes")(app);
 

@@ -38,7 +38,7 @@
     </v-col>
 
     <v-col cols="12" md="8">
-      <v-form ref="contactForm">
+      <v-form ref="contactForm" v-model="valid" lazy-validation>
         <v-text-field
           v-model="fullName"
           :rules="fullNameRules"
@@ -46,6 +46,7 @@
           label="*Nom et prénom"
           outlined
         ></v-text-field>
+
         <v-text-field
           v-model="email"
           :rules="emailRules"
@@ -53,38 +54,33 @@
           label="*E-mail"
           outlined
         ></v-text-field>
+
         <v-text-field
           v-model="phoneNumber"
           :rules="phoneRules"
           type="text"
-          label="Numéro de téléphone"
+          label="*Numéro de téléphone"
           outlined
         ></v-text-field>
-        <v-text-field
-          v-model="adress"
-          type="text"
-          label="Adresse (rue)"
+
+        <v-textarea
+          v-model="message"
+          label="*Message"
           outlined
-        ></v-text-field>
-        <v-text-field v-model="city" type="text" label="Ville" outlined></v-text-field>
-        <v-text-field
-          v-model="zip"
-          type="text"
-          label="Code postale"
-          outlined
-        ></v-text-field>
-        <v-text-field v-model="brand" type="text" label="*Marque" outlined></v-text-field>
-        <v-text-field v-model="model" type="text" label="*Modèle" outlined></v-text-field>
-        <v-text-field
-          v-model="model"
-          type="text"
-          label="*Immatriculation"
-          outlined
-        ></v-text-field>
-        <v-textarea v-model="message" label="*Message" outlined></v-textarea>
+          :rules="messageRules"
+        ></v-textarea>
 
         <v-btn color="primary" class="text-right" @click="submit"> Envoyer </v-btn>
       </v-form>
+      <v-snackbar bottom v-model="snackbar" :color="snackbarColor">
+        {{ snackbarText }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-col>
   </v-row>
 </template>
@@ -93,18 +89,14 @@
 export default {
   name: "Contact",
   data: () => ({
-    invalid: false,
+    snackbar: false,
+    snackbarText: "",
+    snackbarColor: "",
+    valid: true,
     fullName: "",
     email: "",
     phoneNumber: "",
-    adress: "",
-    city: "",
-    zip: "",
-    brand: "",
-    model: "",
     message: "",
-    select: null,
-    checkbox: null,
     fullNameRules: [(v) => !!v || "Nom et prénom requis."],
     emailRules: [
       (v) => !!v || "E-mail requis",
@@ -118,19 +110,46 @@ export default {
       (v) => /^\d+$/.test(v) || "Ce champ n'accèpte que des numéros.",
       (v) => /^\d+$/.test(v) || "Le numéro de téléphone doit être valide",
     ],
+    messageRules: [(v) => !!v || "Message requis."],
   }),
 
   methods: {
     submit() {
-      this.$refs.contactForm.validate();
+      if (this.$refs.contactForm.validate()) {
+        this.$http
+          .post(`/contact`, {
+            name: this.fullName,
+            email: this.email,
+            phoneNumber: this.phoneNumber,
+            message: this.message,
+          })
+          .then((res) => {
+            console.log(res);
+            this.snackbar = true;
+            this.snackbarText = res.data.message;
+            if (res.data.error) {
+              this.snackbarColor = "red";
+            } else {
+              this.snackbarColor = "green";
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            this.snackbar = true;
+            this.snackbarText = err.data.message;
+            this.snackbarColor = "red";
+          });
+      }
     },
     clear() {
-      this.name = "";
-      this.phoneNumber = "";
+      this.valid = true;
+      this.fullName = "";
       this.email = "";
-      this.select = null;
-      this.checkbox = null;
-      this.$refs.reset();
+      this.phoneNumber = "";
+      this.message = "";
+      this.snackbar = false;
+      this.snackbarText = "";
+      this.snackbarColor = "";
     },
   },
 };
