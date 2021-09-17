@@ -67,8 +67,10 @@
         "not dead"
     ],
     "lint-staged": {
+        "*": "prettier --config ./.prettierrc --write \"./src/**/*.js\" \"./src/**/*.vue\" \"./server/*.js\" \"./server/**/*.js\"",
         "*.js": [
-            "yarn format"
+            "eslint --cache --fix",
+            "prettier --write"
         ]
     }
 }
