@@ -66,6 +66,6 @@
         "not dead"
     ],
     "lint-staged": {
-        "*": "yarn format"
+        "*": "prettier --config ./.prettierrc --write \"./src/**/*.js\" \"./src/**/*.vue\" \"./server/*.js\" \"./server/**/*.js\""
     }
 }
