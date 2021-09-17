@@ -6,7 +6,7 @@ import helmet from 'helmet';
 const port = 3000;
 const app = express();
 import cors from 'cors';
-import send from './mailer'
+import send from './mailer';
 
 // Security
 app.use(helmet());
