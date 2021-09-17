@@ -68,7 +68,7 @@
     ],
     "lint-staged": {
         "*.js": [
-            "format"
+            "yarn format"
         ]
     }
 }
