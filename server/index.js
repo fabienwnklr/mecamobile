@@ -1,32 +1,32 @@
-require("dotenv").config();
+require('dotenv').config();
 
-const express = require('express');
-const authJwt = require("./middleware/authJwt");
-const helmet = require('helmet');
+import express, { urlencoded, json } from 'express';
+import { verifyToken } from './middleware/authJwt';
+import helmet from 'helmet';
 const port = 3000;
 const app = express();
-const cors = require("cors");
-const send = require('./mailer');
+import cors from 'cors';
+import send from './mailer';
 
 // Security
 app.use(helmet());
 
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 app.use(
-    express.json({
-        type: ["application/json", "text/plain"],
+    json({
+        type: ['application/json', 'text/plain']
     })
 );
 
 // *Models
-const db = require("./models");
+import { sequelize } from './models';
 
 // Routes
-app.get("/api/checkToken", authJwt.verifyToken, (req, res) => {
+app.get('/api/checkToken', verifyToken, (req, res) => {
     res.status(200).send({
-        message: "Valid token",
+        message: 'Valid token'
     });
 });
 
@@ -34,10 +34,10 @@ app.post('/api/contact', (req, res) => {
     send(req, res);
 });
 
-require("./routes/user.routes")(app);
-require("./routes/service.routes")(app);
+require('./routes/user.routes')(app);
+require('./routes/service.routes')(app);
 
-db.sequelize.sync({ alter: false }).then(async () => {
+sequelize.sync({ alter: false }).then(async () => {
     app.listen(port, () => {
         console.info(`API run at http://localhost:${port}`);
     });

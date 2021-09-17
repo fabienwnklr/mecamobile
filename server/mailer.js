@@ -4,7 +4,7 @@ module.exports = function send(req, res) {
     const email = req.body.email;
     const message = req.body.message;
     const phoneNumber = req.body.phoneNumber;
-    console.log(req.body);
+
     // Create a SMTP transporter object
     const transporter = nodemailer.createTransport({
         service: 'hotmail',
@@ -32,15 +32,16 @@ module.exports = function send(req, res) {
                     <p>Message : ${message}</p>
                 </div>
             </body>
-        </html>`,
+        </html>`
     };
 
-    transporter.sendMail(data).then(info => {
-        res.send({ message: 'Message remis.', infos: info.messageId })
-    }).catch(err => {
-        console.error(err);
-        res.send({ message: 'Une erreur est survenue. Merci d\'essayer un autre moyen de contact.', error: err })
-    })
-
-
-}
+    transporter
+        .sendMail(data)
+        .then(info => {
+            res.send({ message: 'Message remis.', infos: info.messageId });
+        })
+        .catch(err => {
+            console.error(err);
+            res.send({ message: "Une erreur est survenue. Merci d'essayer un autre moyen de contact.", error: err });
+        });
+};

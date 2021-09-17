@@ -14,11 +14,11 @@ module.exports = app => {
 
     // router.get('/', service.getServiceByLinkName);
 
-    router.put('/:id', service.updateService)
+    router.put('/:id', service.updateService);
 
     router.post('/', verifyToken, service.addService);
 
     router.delete('/:id', verifyToken, service.delete);
 
     app.use('/api/service', router);
-}
+};

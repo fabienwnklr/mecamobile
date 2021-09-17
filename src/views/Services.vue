@@ -1,83 +1,79 @@
 <template>
-  <div>
-    <v-row>
-      <v-col cols="12" lg="12" xl="12">
-        <div>
-          <div>
-            <div>
-              <h2 class="text-h4 font-weight-bold">Services</h2>
-
-              <h4 class="text-h6">Voici tous nos services détaillés.</h4>
-            </div>
-
-            <v-divider class="my-4"></v-divider>
-
-            <v-row v-if="dataLoaded">
-              <v-col cols="12" md="6" lg="4" v-for="(service, i) in services" :key="i">
+    <div>
+        <v-row>
+            <v-col cols="12" lg="12" xl="12">
                 <div>
-                  <v-card
-                    outlined
-                    :to="`services/${service.link}`"
-                    :title="`Afficher les détail du service : ${service.name}`"
-                  >
-                    <v-card-title class="light">
-                      <v-btn color="accent"
-                        ><v-icon>{{ service.icon }}</v-icon></v-btn
-                      >
-                      <h2 class="text-h5 ml-2">{{ service.name }}</h2>
-                    </v-card-title>
+                    <div>
+                        <div>
+                            <h2 class="text-h4 font-weight-bold">Services</h2>
 
-                    <v-card-text>
-                      <div class="text-body-1 py-4" v-html="service.description"></div>
-                    </v-card-text>
-                  </v-card>
+                            <h4 class="text-h6">Voici tous nos services détaillés.</h4>
+                        </div>
+
+                        <v-divider class="my-4"></v-divider>
+
+                        <v-row v-if="dataLoaded">
+                            <v-col cols="12" md="6" lg="4" v-for="(service, i) in services" :key="i">
+                                <div>
+                                    <v-card outlined :to="`services/${service.link}`" :title="`Afficher les détail du service : ${service.name}`">
+                                        <v-card-title class="light">
+                                            <v-btn color="accent"
+                                                ><v-icon>{{ service.icon }}</v-icon></v-btn
+                                            >
+                                            <h2 class="text-h5 ml-2">{{ service.name }}</h2>
+                                        </v-card-title>
+
+                                        <v-card-text>
+                                            <div class="text-body-1 py-4" v-html="service.description"></div>
+                                        </v-card-text>
+                                    </v-card>
+                                </div>
+                            </v-col>
+                        </v-row>
+                        <v-row v-else>
+                            <v-col cols="12" md="6" lg="4" v-for="(service, i) in 8" :key="i">
+                                <v-skeleton-loader
+                                    v-bind="attrs"
+                                    type="card-heading, list-item-two-line ,list-item-three-line, list-item-three-line, list-item-three-line "
+                                ></v-skeleton-loader>
+                            </v-col>
+                        </v-row>
+                    </div>
                 </div>
-              </v-col>
-            </v-row>
-            <v-row v-else>
-              <v-col cols="12" md="6" lg="4" v-for="(service, i) in 8" :key="i">
-                <v-skeleton-loader
-                  v-bind="attrs"
-                  type="card-heading, list-item-two-line ,list-item-three-line, list-item-three-line, list-item-three-line "
-                ></v-skeleton-loader>
-              </v-col>
-            </v-row>
-          </div>
-        </div>
-      </v-col>
-    </v-row>
-  </div>
+            </v-col>
+        </v-row>
+    </div>
 </template>
 
 <script>
 export default {
-  name: "Services",
-  data: () => ({
-    dataLoaded: false,
-    services: [],
-    attrs: {
-      class: "mb-6",
-      boilerplate: true,
-      elevation: 2,
-    },
-  }),
-  methods: {
-    getServices() {
-      const that = this;
+    name: 'Services',
+    data: () => ({
+        dataLoaded: false,
+        services: [],
+        attrs: {
+            class: 'mb-6',
+            boilerplate: true,
+            elevation: 2
+        }
+    }),
+    methods: {
+        getServices() {
+            const that = this;
 
-      this.$http
-        .get("/service/full")
-        .then((result) => {
-          that.services = result.data;
-          that.dataLoaded = true;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+            this.$http
+                .get('/service/full')
+                .then(result => {
+                    that.services = result.data;
+                    that.dataLoaded = true;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
     },
-  },
-  mounted() {
-    this.getServices();
-  },
+    mounted() {
+        this.getServices();
+    }
 };
 </script>

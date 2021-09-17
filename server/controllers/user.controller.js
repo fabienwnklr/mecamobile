@@ -28,17 +28,17 @@ exports.login = (req, res) => {
                 const userLogged = {
                     id: userFind.id,
                     username: userFind.username,
-                    email: userFind.email,
+                    email: userFind.email
                 };
 
                 jwt.sign({ user: userLogged }, 'secretkey', { expiresIn: '7d' }, (err, token) => {
-                    if (err) res.json(err)
+                    if (err) res.json(err);
                     res.status(200).send({ token: token, user: userLogged });
-                })
+                });
             } else {
                 res.status(403).send({
                     message: 'Mot de passe ou email incorrect.'
-                })
+                });
             }
         })
         .catch(err =>
@@ -46,8 +46,8 @@ exports.login = (req, res) => {
                 errorThrow: err.message,
                 message: 'Erreur de connexion.'
             })
-        )
-}
+        );
+};
 
 exports.register = (req, res) => {
     if (!req.body.username || !req.body.email || !req.body.password) {
@@ -60,8 +60,8 @@ exports.register = (req, res) => {
     const createdUser = {
         username: req.body.username,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 15),
-    }
+        password: bcrypt.hashSync(req.body.password, 15)
+    };
 
     User.create(createdUser)
         .then(() => {
@@ -73,7 +73,7 @@ exports.register = (req, res) => {
                 message: `Une erreur est survenue lors de la création de l'utilisateur.`
             });
         });
-}
+};
 
 exports.getUser = (req, res) => {
     const id = req.params.id;
@@ -96,15 +96,17 @@ exports.getUser = (req, res) => {
                 message: `Erreur de récupération de l'utilisateur pour id = ${id}`
             });
         });
-}
+};
 
 exports.getUsers = (req, res) => {
-    User.findAll({ attributes: ['username', 'id', 'createdAt', 'createdBy', 'updatedAt', 'updatedBy'] }).then(users => {
-        res.status(200).send(users);
-    }).catch(err => {
-        console.error(err);
-    })
-}
+    User.findAll({ attributes: ['username', 'id', 'createdAt', 'createdBy', 'updatedAt', 'updatedBy'] })
+        .then(users => {
+            res.status(200).send(users);
+        })
+        .catch(err => {
+            console.error(err);
+        });
+};
 
 exports.getUserByUsername = (req, res) => {
     const username = req.body.username;
@@ -133,8 +135,8 @@ exports.getUserByUsername = (req, res) => {
                 errorThrow: err.message,
                 message: 'Erreur de connexion.'
             })
-        )
-}
+        );
+};
 
 exports.update = (req, res) => {
     const id = req.params.id;
@@ -148,14 +150,14 @@ exports.update = (req, res) => {
     User.update(values, {
         where: { id: id }
     })
-        .then((num) => {
+        .then(num => {
             if (num) {
                 if (values.password) delete values.password;
 
                 res.status(200).send({
                     values,
                     message: 'Modification(s) enregistrée(s)'
-                })
+                });
             }
         })
         .catch(err => {

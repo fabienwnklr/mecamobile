@@ -4,41 +4,41 @@ const Service = db.service;
 exports.getAllServices = (req, res) => {
     Service.findAll()
         .then(data => {
-            res.send(data).status(200)
+            res.send(data).status(200);
         })
         .catch(err =>
             res.status(500).send({
                 errorThrow: err.message,
                 message: 'Erreur lors de la récupération des services.'
             })
-        )
-}
+        );
+};
 
 exports.getServicesHomePage = (req, res) => {
     Service.findAll({ attributes: ['name', 'icon', 'link'], where: { online: '1' } })
         .then(data => {
-            res.send(data).status(200)
+            res.send(data).status(200);
         })
         .catch(err =>
             res.status(500).send({
                 errorThrow: err.message,
                 message: 'Erreur lors de la récupération des services.'
             })
-        )
-}
+        );
+};
 
 exports.getServicesFull = (req, res) => {
     Service.findAll({ attributes: ['name', 'icon', 'description', 'link'], where: { online: '1' } })
         .then(data => {
-            res.send(data).status(200)
+            res.send(data).status(200);
         })
         .catch(err =>
             res.status(500).send({
                 errorThrow: err.message,
                 message: 'Erreur lors de la récupération des services.'
             })
-        )
-}
+        );
+};
 
 exports.getServiceById = (req, res) => {
     const id = req.params.id;
@@ -48,28 +48,36 @@ exports.getServiceById = (req, res) => {
         return;
     }
 
-    Service.findByPk(id).then(data =>
-        res.send(data)
-    ).catch(err => res.status(500).send({
-        errorThrow: err.message,
-        message: 'Erreur lors de la récupération du service.'
-    }))
-}
+    Service.findByPk(id)
+        .then(data => res.send(data))
+        .catch(err =>
+            res.status(500).send({
+                errorThrow: err.message,
+                message: 'Erreur lors de la récupération du service.'
+            })
+        );
+};
 
 exports.getServiceByLinkName = (req, res) => {
     const link = req.params.id;
 
-    Service.findOne({ where: { link: link } }).then(data =>
-        res.send(data)
-    ).catch(err => res.status(500).send({
-        errorThrow: err.message,
-        message: 'Erreur lors de la récupération du service.'
-    }))
-}
+    Service.findOne({ where: { link: link } })
+        .then(data => res.send(data))
+        .catch(err =>
+            res.status(500).send({
+                errorThrow: err.message,
+                message: 'Erreur lors de la récupération du service.'
+            })
+        );
+};
 
 exports.addService = (req, res) => {
     // on créer l'ancre par rapport au nom du service
-    const link = req.body.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ', '_').toLowerCase();
+    const link = req.body.name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(' ', '_')
+        .toLowerCase();
 
     const newService = {
         icon: 'mdi-' + req.body.icon,
@@ -80,26 +88,33 @@ exports.addService = (req, res) => {
         link
     };
 
-    Service.create(newService).then(data => {
-        Service.findByPk(data.id).then(serviceAdded => {
-            res.status(200).send({
-                message: 'Service créé !',
-                data: serviceAdded
-            })
+    Service.create(newService)
+        .then(data => {
+            Service.findByPk(data.id).then(serviceAdded => {
+                res.status(200).send({
+                    message: 'Service créé !',
+                    data: serviceAdded
+                });
+            });
         })
-    }).catch(error => res.status(500).send({
-        errorThrow: error,
-        message: 'Erreur lors de la création du service'
-    }))
-}
+        .catch(error =>
+            res.status(500).send({
+                errorThrow: error,
+                message: 'Erreur lors de la création du service'
+            })
+        );
+};
 
 exports.updateService = (req, res) => {
     const id = req.params.id;
     const values = req.body;
 
     // on créer l'ancre par rapport au nom du service
-    const link = values.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(' ', '_').toLowerCase();
-
+    const link = values.name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(' ', '_')
+        .toLowerCase();
 
     values.link = link;
     values.updatedAt = +new Date();
@@ -109,21 +124,21 @@ exports.updateService = (req, res) => {
     }
 
     Service.update(values, {
-        where: { id: id },
+        where: { id: id }
     })
-        .then((num) => {
+        .then(num => {
             console.log(num);
             if (num) {
                 res.status(200).send({
                     values,
-                    message: "Modification(s) sauvegardée(s).",
+                    message: 'Modification(s) sauvegardée(s).'
                 });
             }
         })
-        .catch((err) => {
+        .catch(err => {
             res.status(500).send({
                 errorThrow: err,
-                message: `Une erreur est survenue lors de la modification du service ${values.name}`,
+                message: `Une erreur est survenue lors de la modification du service ${values.name}`
             });
         });
 };
@@ -132,38 +147,38 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     Service.destroy({
-        where: { id: id },
+        where: { id: id }
     })
-        .then((num) => {
+        .then(num => {
             if (num === 1) {
                 res.send({
-                    message: "Service removed",
+                    message: 'Service removed'
                 });
             } else {
                 res.send({
-                    message: `Could not delete Service with id = ${id}, maybe already removed`,
+                    message: `Could not delete Service with id = ${id}, maybe already removed`
                 });
             }
         })
-        .catch((err) => {
+        .catch(err => {
             res.status(401).send({
                 errorThrow: err,
-                message: `Could not delete Service with id = ${id}`,
+                message: `Could not delete Service with id = ${id}`
             });
         });
 };
 
 exports.deleteAll = (req, res) => {
     Service.destroy({
-        truncate: false,
+        truncate: false
     })
-        .then((nums) => {
+        .then(nums => {
             res.send({ message: `${nums} Tutorials were deleted successfully!` });
         })
-        .catch((err) => {
+        .catch(err => {
             res.status(401).send({
                 errorThrow: err,
-                message: "Some error occurred while removing all tutorials.",
+                message: 'Some error occurred while removing all tutorials.'
             });
         });
 };

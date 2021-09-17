@@ -1,4 +1,4 @@
-const { verifyToken } = require('../middleware/authJwt.js')
+const { verifyToken } = require('../middleware/authJwt.js');
 
 module.exports = app => {
     const user = require('../controllers/user.controller.js');
@@ -10,11 +10,11 @@ module.exports = app => {
 
     router.get('/:username', user.getUserByUsername);
 
-    router.put('/:id', verifyToken, user.update)
+    router.put('/:id', verifyToken, user.update);
 
     router.post('/login', user.login);
 
     router.post('/register', user.register);
 
     app.use('/api/user', router);
-}
+};
