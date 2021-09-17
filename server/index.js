@@ -9,7 +9,7 @@ import cors from 'cors';
 import send from './mailer';
 
 // Security
-app.use(helmet())
+app.use(helmet());
 
 app.use(cors());
 app.use(urlencoded({ extended: true }));
