@@ -6,8 +6,7 @@
         "serve": "concurrently \"vue-cli-service serve\" \"npx nodemon server\"",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "format": "prettier --config ./.prettierrc --write \"./src/**/*.js\" \"./src/**/*.vue\" \"./server/*.js\" \"./server/**/*.js\"",
-        "prepare": "husky install"
+        "format": "prettier --config ./.prettierrc --write \"./src/**/*.js\" \"./src/**/*.vue\" \"./server/*.js\" \"./server/**/*.js\""
     },
     "dependencies": {
         "axios": "^0.21.1",
@@ -37,6 +36,8 @@
         "concurrently": "^6.2.0",
         "eslint": "^6.7.2",
         "eslint-plugin-vue": "^6.2.2",
+        "husky": "^7.0.2",
+        "lint-staged": "^11.1.2",
         "nodemon": "^2.0.12",
         "prettier": "^2.4.1",
         "sass": "^1.19.0",
