@@ -10,6 +10,14 @@
                         <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item @click="logout">
+                    <v-list-item-action>
+                        <v-icon>mdi-logout</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                        <v-list-item-title>Se déconnecter</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
     </div>
@@ -44,11 +52,6 @@ export default {
                 title: 'Utilisateurs',
                 to: '/admin/users',
                 icon: 'account-group-outline'
-            },
-            {
-                title: 'Se déconnecter',
-                to: '#',
-                icon: 'logout'
             }
         ]
     }),
@@ -57,6 +60,11 @@ export default {
             if (this.$route.path !== '/') {
                 this.$router.push('/');
             }
+        },
+        logout() {
+            localStorage.removeItem('user')
+            localStorage.removeItem('jwt')
+            this.$router.push('/');
         }
     }
 };

@@ -17,9 +17,7 @@
                                 <div>
                                     <v-card outlined :to="`services/${service.link}`" :title="`Afficher les détail du service : ${service.name}`">
                                         <v-card-title class="light">
-                                            <v-btn color="accent"
-                                                ><v-icon>{{ service.icon }}</v-icon></v-btn
-                                            >
+                                            <v-icon class="custom accent white--text">{{ service.icon }}</v-icon>
                                             <h2 class="text-h5 ml-2">{{ service.name }}</h2>
                                         </v-card-title>
 

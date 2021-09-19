@@ -7,6 +7,11 @@
                     gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
                     :height="!$vuetify.breakpoint.smAndUp ? '85vh' : '50vh'"
                 >
+                    <template v-slot:placeholder>
+                        <v-row class="fill-height ma-0" align="center" justify="center">
+                            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                        </v-row>
+                    </template>
                     <v-card-text class="fill-height d-flex align-end">
                         <v-row class="flex-column rounded">
                             <v-col cols="12" md="10" lg="8" xl="7">

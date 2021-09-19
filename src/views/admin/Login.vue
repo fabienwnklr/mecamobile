@@ -6,9 +6,18 @@
                     <v-card-title class="justify-center light mb-2"> Connexion à la console d'administration </v-card-title>
                     <v-card-text>
                         <v-form v-model="valid" lazy-validation ref="loginForm">
-                            <v-text-field v-model="userName" :rules="userNameRules" label="Nom d'utilisateur" required></v-text-field>
+                            <v-text-field outlined v-model="userName" :rules="userNameRules" label="Nom d'utilisateur" required></v-text-field>
 
-                            <v-text-field v-model="pass" :counter="10" :rules="passRules" label="Mot de passe" required type="password"></v-text-field>
+                            <v-text-field
+                                outlined
+                                v-model="pass"
+                                :rules="passRules"
+                                label="Mot de passe"
+                                required
+                                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                                :type="show ? 'text' : 'password'"
+                                @click:append="show = !show"
+                            ></v-text-field>
 
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -27,6 +36,7 @@ export default {
     data: () => ({
         valid: false,
         loading: false,
+        show: false,
         userName: '',
         pass: '',
         userNameRules: [v => !!v || 'E-mail requis'],

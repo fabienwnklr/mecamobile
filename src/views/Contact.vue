@@ -109,7 +109,7 @@ export default {
                         this.email = '';
                         this.phoneNumber = '';
                         this.message = '';
-                        this.$refs.contactForm.resetValidation()
+                        this.$refs.contactForm.resetValidation();
                         if (res.data.error) {
                             this.snackbarColor = 'red';
                         } else {

@@ -17,9 +17,7 @@
                                 <div>
                                     <v-card outlined>
                                         <v-card-title class="light">
-                                            <v-btn color="accent"
-                                                ><v-icon>{{ service.icon }}</v-icon></v-btn
-                                            >
+                                            <v-icon class="custom accent white--text">{{ service.icon }}</v-icon>
                                             <h2 class="text-h5 ml-2">{{ service.name }}</h2>
                                         </v-card-title>
 
@@ -62,3 +60,13 @@ export default {
     }
 };
 </script>
+
+<style>
+.custom {
+    border-radius: 4px;
+    display: inline-flex;
+    outline: 0;
+    padding: 0 16px;
+    height: 36px;
+}
+</style>

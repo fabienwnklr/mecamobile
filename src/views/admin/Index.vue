@@ -1,6 +1,6 @@
 <template>
     <main>
-        <BackPrevRoute v-if="$vuetify.breakpoint.lgAndUp"></BackPrevRoute>
+        <BackPrevRoute v-if="$vuetify.breakpoint.lgAndUp && prevRoute !== 'Login'"></BackPrevRoute>
         <AppBarAdmin v-if="$route.name !== 'Login'"></AppBarAdmin>
         <router-view></router-view>
     </main>
@@ -8,11 +8,15 @@
 
 <script>
 export default {
+    name: 'Admin',
+
     components: {
         AppBarAdmin: () => import('@/components/admin/layout/AppBarAdmin.vue'),
         BackPrevRoute: () => import('@/components/admin/BackPrevRoute.vue')
     },
-
+    data: () => ({
+        prevRoute: ''
+    }),
     methods: {
         detectUser() {
             try {
@@ -43,6 +47,10 @@ export default {
     },
     updated() {
         this.detectUser();
+    },
+    beforeRouteUpdate(to, from, next) {
+        this.prevRoute = from.name;
+        next();
     }
 };
 </script>
