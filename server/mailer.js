@@ -16,8 +16,8 @@ module.exports = function send(req, res) {
 
     // Message object
     let data = {
-        from: email,
-        to: `Me <${process.env.MAIL_USER}>`,
+        from: process.env.MAIL_USER,
+        to: `Me <fabienwinkler@outlook.fr>`,
         subject: 'Formulaire de contact',
         html: `
         <html>
@@ -25,7 +25,7 @@ module.exports = function send(req, res) {
                 <link rel="stylesheet" href="./mailer.css">
             </head>
             <body>
-                <div class="page">
+                <div class="main">
                     <h1>Message envoyé depuis le formulaire de contact du site</h1>
                     <p>Numéro de téléphone : ${phoneNumber}</p>
                     <p>Adresse mail : ${email}</p>
@@ -42,6 +42,6 @@ module.exports = function send(req, res) {
         })
         .catch(err => {
             console.error(err);
-            res.send({ message: "Une erreur est survenue. Merci d'essayer un autre moyen de contact.", error: err });
+            res.status(err.responseCode).send({ message: "Une erreur est survenue. Merci d'essayer un autre moyen de contact.", error: err });
         });
 };

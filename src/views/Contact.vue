@@ -47,7 +47,7 @@
 
                 <v-textarea v-model="message" label="*Message" outlined :rules="messageRules"></v-textarea>
 
-                <v-btn color="primary" class="text-right" @click="submit"> Envoyer </v-btn>
+                <v-btn color="primary" :disabled="disabled" :loading="loading" class="text-right" @click="submit"> Envoyer </v-btn>
             </v-form>
             <v-snackbar bottom v-model="snackbar" :color="snackbarColor">
                 {{ snackbarText }}
@@ -67,6 +67,8 @@ export default {
     name: 'Contact',
     data: () => ({
         snackbar: false,
+        disabled: false,
+        loading: false,
         snackbarText: '',
         snackbarColor: '',
         valid: true,
@@ -88,6 +90,8 @@ export default {
     methods: {
         submit() {
             if (this.$refs.contactForm.validate()) {
+                this.disabled = true;
+                this.loading = true;
                 this.$http
                     .post(`/contact`, {
                         name: this.fullName,
@@ -99,6 +103,13 @@ export default {
                         console.log(res);
                         this.snackbar = true;
                         this.snackbarText = res.data.message;
+                        this.disabled = false;
+                        this.loading = false;
+                        this.fullName = '';
+                        this.email = '';
+                        this.phoneNumber = '';
+                        this.message = '';
+                        this.$refs.contactForm.resetValidation()
                         if (res.data.error) {
                             this.snackbarColor = 'red';
                         } else {
@@ -107,6 +118,8 @@ export default {
                     })
                     .catch(err => {
                         console.error(err);
+                        this.disabled = false;
+                        this.loading = false;
                         this.snackbar = true;
                         this.snackbarText = err.data.message;
                         this.snackbarColor = 'red';
