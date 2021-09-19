@@ -62,8 +62,8 @@ export default {
             }
         },
         logout() {
-            localStorage.removeItem('user')
-            localStorage.removeItem('jwt')
+            localStorage.removeItem('user');
+            localStorage.removeItem('jwt');
             this.$router.push('/');
         }
     }
