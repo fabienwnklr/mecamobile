@@ -37,7 +37,7 @@
                             <v-col cols="6" sm="6" md="4" lg="3" v-for="(service, i) in services" :key="i">
                                 <v-hover v-slot:default="{ hover }" open-delay="50" close-delay="50">
                                     <div>
-                                        <v-card flat :elevation="hover ? 12 : 0" hover :to="`services/${service.link}`" class="justify-center">
+                                        <v-card flat :elevation="hover ? 12 : 3" hover :to="`services/${service.link}`" class="justify-center">
                                             <v-card-title class="text-h5 justify-center flex-column">
                                                 <v-icon color="red" class="black rounded-circle py-2 px-2">{{ service.icon }}</v-icon>
                                                 <span class="pt-2 text-body-2 text-sm-h5">{{ service.name }}</span>

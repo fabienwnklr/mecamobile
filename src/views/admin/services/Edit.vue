@@ -42,7 +42,7 @@
                     </v-container>
 
                     <v-col cols="12">
-                        <tiptap-vuetify ref="editorService" v-model="service.description" :extensions="extensions" />
+                        <c-editor ref="editor" :data="service.description" />
                     </v-col>
                 </v-row>
 
@@ -65,29 +65,11 @@
 </template>
 
 <script>
-import {
-    TiptapVuetify,
-    Heading,
-    Bold,
-    Italic,
-    Strike,
-    Underline,
-    Code,
-    Paragraph,
-    BulletList,
-    OrderedList,
-    ListItem,
-    Link,
-    Blockquote,
-    HardBreak,
-    HorizontalRule,
-    History
-} from 'tiptap-vuetify';
-
+import CEditor from '@/components/admin/Editor'
 export default {
     name: 'Edit',
     components: {
-        TiptapVuetify,
+        CEditor,
         IconHelper: () => import('@/components/admin/IconHelper.vue')
     },
     data: () => ({
@@ -102,31 +84,7 @@ export default {
             icon: 'home'
         },
         cloneService: null,
-        rules: [v => !!v || 'Champ requis.'],
-        extensions: [
-            History,
-            Blockquote,
-            Link,
-            Underline,
-            Strike,
-            Italic,
-            ListItem,
-            BulletList,
-            OrderedList,
-            [
-                Heading,
-                {
-                    options: {
-                        levels: [1, 2, 3]
-                    }
-                }
-            ],
-            Bold,
-            Code,
-            HorizontalRule,
-            Paragraph,
-            HardBreak
-        ]
+        rules: [v => !!v || 'Champ requis.']
     }),
     methods: {
         isModified() {
@@ -150,7 +108,7 @@ export default {
         updateService() {
             this.valid = this.$refs.editService.validate();
 
-            if (['', '\n'].includes(this.$refs.editorService.editor.getHTML())) {
+            if (['', '\n'].includes(this.$refs.editor.$refs.CEditor.editor.getContent())) {
                 this.snackbar = true;
                 this.snackbarText = 'Une déscription est requise.';
                 this.snackbarColor = 'red';

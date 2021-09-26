@@ -39,7 +39,7 @@
                         </v-row>
                     </v-col>
                     <v-col cols="12">
-                        <tiptap-vuetify ref="editorService" v-model="service.description" :extensions="extensions" />
+                        <c-editor ref="editor" v-model="service.description"></c-editor>
                     </v-col>
 
                     <v-col class="justify-content-end">
@@ -59,29 +59,13 @@
 </template>
 
 <script>
-import {
-    TiptapVuetify,
-    Heading,
-    Bold,
-    Italic,
-    Strike,
-    Underline,
-    Code,
-    Paragraph,
-    BulletList,
-    OrderedList,
-    ListItem,
-    Link,
-    Blockquote,
-    HardBreak,
-    HorizontalRule,
-    History
-} from 'tiptap-vuetify';
+import CEditor from '@/components/admin/Editor'
+import IconHelper from '@/components/admin/IconHelper.vue';
 export default {
-    name: 'Edit',
+    name: 'Create',
     components: {
-        TiptapVuetify,
-        IconHelper: () => import('@/components/admin/IconHelper.vue')
+        CEditor,
+        IconHelper
     },
     data: () => ({
         snackbar: false,
@@ -94,31 +78,7 @@ export default {
             name: '',
             description: ''
         },
-        rules: [v => !!v || 'Champ requis.'],
-        extensions: [
-            History,
-            Blockquote,
-            Link,
-            Underline,
-            Strike,
-            Italic,
-            ListItem,
-            BulletList,
-            OrderedList,
-            [
-                Heading,
-                {
-                    options: {
-                        levels: [1, 2, 3]
-                    }
-                }
-            ],
-            Bold,
-            Code,
-            HorizontalRule,
-            Paragraph,
-            HardBreak
-        ]
+        rules: [v => !!v || 'Champ requis.']
     }),
     methods: {
         createService() {
@@ -126,7 +86,7 @@ export default {
 
             if (!this.valid) return;
 
-            if (['', '\n'].includes(this.$refs.createEditor.quill.getText())) {
+            if (['', '\n'].includes(this.$refs.editor.$refs.CEditor.editor.getContent())) {
                 this.snackbar = true;
                 this.snackbarText = 'Une déscription est requise.';
                 this.snackbarColor = 'red';

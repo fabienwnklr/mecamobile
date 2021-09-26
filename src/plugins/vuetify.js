@@ -4,14 +4,9 @@ import Vuetify from 'vuetify/lib';
 import colors from 'vuetify/lib/util/colors';
 import fr from 'vuetify/lib/locale/fr';
 
-Vue.use(Vuetify);
 
-// import plugin
-import { TiptapVuetifyPlugin } from 'tiptap-vuetify';
-// don't forget to import CSS styles
-import 'tiptap-vuetify/dist/main.css';
-// Vuetify's CSS styles
-import 'vuetify/dist/vuetify.min.css';
+Vue.prototype.isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+Vue.use(Vuetify);
 
 const vuetify = new Vuetify({
     lang: {
@@ -19,6 +14,7 @@ const vuetify = new Vuetify({
         current: 'fr'
     },
     theme: {
+        dark: Vue.prototype.isDarkTheme,
         options: {
             customProperties: true
         },
@@ -30,6 +26,9 @@ const vuetify = new Vuetify({
                 light: colors.grey.lighten4,
                 light2: colors.grey.lighten3,
                 light3: colors.grey.lighten2
+            },
+            dark: {
+                accent: colors.blue.lighten1
             }
         }
     }
@@ -37,12 +36,5 @@ const vuetify = new Vuetify({
 
 // use Vuetify's plugin
 Vue.use(Vuetify);
-// use this package's plugin
-Vue.use(TiptapVuetifyPlugin, {
-    // the next line is important! You need to provide the Vuetify Object to this place.
-    vuetify, // same as "vuetify: vuetify"
-    // optional, default to 'md' (default vuetify icons before v2.0.0)
-    iconsGroup: 'mdi'
-});
 
 export default vuetify;
