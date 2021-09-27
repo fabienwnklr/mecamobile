@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-navigation-drawer v-if="!$vuetify.breakpoint.smAndUp" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app color="primary" dark>
+        <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndDown" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app color="primary" dark>
             <v-list nav color="primary">
                 <v-list-item v-for="(item, i) in btnItems" :key="i + 100" link :to="item.to" :href="item.href" :target="item.target">
                     <v-list-item-content>
@@ -19,7 +19,7 @@
             <v-container :fluid="$vuetify.breakpoint.mdAndDown" :class="{ 'px-0': !$vuetify.breakpoint.smAndUp }">
                 <v-row align="center" justify="space-between" :no-gutters="!$vuetify.breakpoint.smAndUp">
                     <v-col class="d-flex align-end">
-                        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.smAndUp" />
+                        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.mdAndDown" />
                         <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5 primary--text" @click="home">
                             <v-icon large color="primary">mdi-feather</v-icon>Hero
                             <span class="accent--text">UI</span>

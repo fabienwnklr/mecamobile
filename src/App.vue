@@ -22,3 +22,32 @@ export default {
     }
 };
 </script>
+
+<style>
+.custom {
+    border-radius: 4px;
+    display: inline-flex;
+    outline: 0;
+    padding: 0 16px;
+    height: 36px;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: var(--v-primary-base);
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--v-primary-darken3);;
+}
+</style>

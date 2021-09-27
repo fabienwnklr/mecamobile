@@ -1,6 +1,6 @@
 <template>
     <v-row class="mt-4">
-        <v-col cols="12" md="4">
+        <v-col class="d-none d-md-block" cols="12" md="4">
             <v-card>
                 <v-card-title class="light3"> Nom de l'entreprise </v-card-title>
                 <v-card-text>
@@ -47,7 +47,9 @@
 
                 <v-textarea v-model="message" label="*Message" outlined :rules="messageRules"></v-textarea>
 
-                <v-btn color="primary" :disabled="disabled" :loading="loading" class="text-right" @click="submit"> Envoyer </v-btn>
+                <v-spacer></v-spacer>
+                
+                <v-btn color="primary" :disabled="disabled" :loading="loading" @click="submit"> Envoyer </v-btn>
             </v-form>
             <v-snackbar bottom v-model="snackbar" :color="snackbarColor">
                 {{ snackbarText }}

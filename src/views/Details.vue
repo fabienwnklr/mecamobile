@@ -60,13 +60,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.custom {
-    border-radius: 4px;
-    display: inline-flex;
-    outline: 0;
-    padding: 0 16px;
-    height: 36px;
-}
-</style>
