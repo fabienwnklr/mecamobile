@@ -65,7 +65,8 @@
 </template>
 
 <script>
-import CEditor from '@/components/admin/Editor'
+import CEditor from '@/components/admin/Editor';
+
 export default {
     name: 'Edit',
     components: {

@@ -4,7 +4,6 @@ import Vuetify from 'vuetify/lib';
 import colors from 'vuetify/lib/util/colors';
 import fr from 'vuetify/lib/locale/fr';
 
-
 Vue.prototype.isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 Vue.use(Vuetify);
 

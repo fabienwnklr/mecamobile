@@ -59,8 +59,9 @@
 </template>
 
 <script>
-import CEditor from '@/components/admin/Editor'
+import CEditor from '@/components/admin/Editor';
 import IconHelper from '@/components/admin/IconHelper.vue';
+
 export default {
     name: 'Create',
     components: {
