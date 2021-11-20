@@ -116,6 +116,7 @@ export default {
                 return;
             }
 
+            this.service.description = this.$refs.editor.$refs.CEditor.editor.getContent();
             this.service.updatedBy = JSON.parse(localStorage.getItem('user')).username;
 
             const that = this;

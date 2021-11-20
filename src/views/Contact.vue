@@ -49,7 +49,7 @@
 
                 <v-spacer></v-spacer>
                 
-                <v-btn color="primary" :disabled="disabled" :loading="loading" @click="submit"> Envoyer </v-btn>
+                <v-btn color="primary" :loading="loading" @click="submit"> Envoyer </v-btn>
             </v-form>
             <v-snackbar bottom v-model="snackbar" :color="snackbarColor">
                 {{ snackbarText }}
@@ -73,7 +73,7 @@ export default {
         loading: false,
         snackbarText: '',
         snackbarColor: '',
-        valid: true,
+        valid: false,
         fullName: '',
         email: '',
         phoneNumber: '',

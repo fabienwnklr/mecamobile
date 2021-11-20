@@ -11,10 +11,10 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar:
-                'undo redo | formatselect | bold italic forecolor backcolor | \
+                'undo redo | formatselect | bold italic underline forecolor backcolor | \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent preview | removeformat | help',
-            quickbars_selection_toolbar: 'bold italic | forecolor backcolor h2 h3 blockquote quickimage',
+            quickbars_selection_toolbar: 'bold italic underline | forecolor backcolor h2 h3 blockquote quickimage',
             skin: this.isDarkTheme ? 'oxide-dark' : 'oxide',
             content_css: this.isDarkTheme ? 'dark' : 'default'
         }"
