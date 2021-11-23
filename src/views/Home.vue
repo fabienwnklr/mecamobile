@@ -18,8 +18,8 @@
                                 <h1 class="text-h3 py-3 light--text text-h4">MECAMOBILE 40 Entretien, diagnostic et réparations automobile à domicile</h1>
                             </v-col>
                             <v-col class="d-flex align-center">
-                                <v-btn color="accent bg-light mr-2 text-caption text-md-button" href="tel:123-456-7890"> Appeler </v-btn>
-                                <v-btn color="accent bg-light text-caption text-md-button" to="contact"> Envoyer un email </v-btn>
+                                <v-btn color="primary bg-light mr-2 text-caption text-md-button" href="tel:123-456-7890"> Appeler </v-btn>
+                                <v-btn color="primary bg-light text-caption text-md-button" to="contact"> Envoyer un email </v-btn>
                             </v-col>
                         </v-row>
                     </v-card-text>

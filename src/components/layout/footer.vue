@@ -1,7 +1,7 @@
 <template>
-    <v-footer dark padless>
-        <v-card class="flex" flat tile>
-            <v-card-title class="accent justify-center">
+    <v-footer padless>
+        <v-card class="flex primary" flat tile>
+            <v-card-title class="justify-center">
                 <v-btn v-for="icon in icons" :key="icon" class="mx-4" dark icon>
                     <v-icon size="24px">
                         {{ icon }}
@@ -9,7 +9,7 @@
                 </v-btn>
             </v-card-title>
 
-            <v-card-text class="py-2 white--text text-center"
+            <v-card-text class="py-2 text-center secondary white--text"
                 >BestOil Team France Copyright © Tous droits réservés - Mentions légales - Politique de confidentialité</v-card-text
             >
         </v-card>

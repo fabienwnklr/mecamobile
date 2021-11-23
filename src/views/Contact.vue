@@ -2,7 +2,7 @@
     <v-row class="mt-4">
         <v-col class="d-none d-md-block" cols="12" md="4">
             <v-card>
-                <v-card-title class="light3"> Nom de l'entreprise </v-card-title>
+                <v-card-title class="primary white--text"> Nom de l'entreprise </v-card-title>
                 <v-card-text>
                     <v-list>
                         <v-list-item>

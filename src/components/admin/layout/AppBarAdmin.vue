@@ -33,11 +33,11 @@ export default {
                 to: '/',
                 icon: 'home'
             },
-            {
-                title: 'Tableau de bord',
-                to: '/admin/dashboard',
-                icon: 'view-dashboard'
-            },
+            // {
+            //     title: 'Tableau de bord',
+            //     to: '/admin/dashboard',
+            //     icon: 'view-dashboard'
+            // },
             {
                 title: 'Créer un service',
                 to: '/admin/services/create',
@@ -48,11 +48,11 @@ export default {
                 to: '/admin/services/list',
                 icon: 'clipboard-list-outline'
             },
-            {
-                title: 'Utilisateurs',
-                to: '/admin/users',
-                icon: 'account-group-outline'
-            }
+            // {
+            //     title: 'Utilisateurs',
+            //     to: '/admin/users',
+            //     icon: 'account-group-outline'
+            // }
         ]
     }),
     methods: {

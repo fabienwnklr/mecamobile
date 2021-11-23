@@ -3,7 +3,7 @@
         ref="CEditor"
         api-key="u3ded68aeqsndhshanqxnsdu0v4ok0ii0mkphffsqi279gu5"
         :init="{
-            height: 600,
+            height: '70vh',
             menubar: false,
             plugins: [
                 'advlist autolink lists link image charmap print preview anchor quickbars print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',

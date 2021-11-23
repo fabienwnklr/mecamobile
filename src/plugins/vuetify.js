@@ -5,6 +5,7 @@ import colors from 'vuetify/lib/util/colors';
 import fr from 'vuetify/lib/locale/fr';
 
 Vue.prototype.isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+Vue.prototype.isDarkTheme = false;
 Vue.use(Vuetify);
 
 const vuetify = new Vuetify({
@@ -19,15 +20,20 @@ const vuetify = new Vuetify({
         },
         themes: {
             light: {
-                primary: colors.shades.black,
-                secondary: '#818383',
-                accent: '#2178ff',
-                light: colors.grey.lighten4,
-                light2: colors.grey.lighten3,
-                light3: colors.grey.lighten2
+                primary: '#386FA4',
+                secondary: '#133C55',
+                light: colors.grey.lighten3,
+                light1: colors.grey.lighten1,
+                light2: '#91E5F6',
+                light3: '#BBEFFA'
             },
             dark: {
-                accent: colors.blue.lighten1
+                primary: '#386FA4',
+                secondary: '#133C55',
+                light: colors.grey.lighten3,
+                light1: colors.grey.lighten1,
+                light2: '#91E5F6',
+                light3: '#ACEBF9'
             }
         }
     }

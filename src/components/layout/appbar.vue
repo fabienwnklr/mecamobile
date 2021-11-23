@@ -22,12 +22,12 @@
                         <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.mdAndDown" />
                         <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5 primary--text" @click="home">
                             <v-icon large color="primary">mdi-feather</v-icon>Hero
-                            <span class="accent--text">UI</span>
+                            <span class="primary--text">UI</span>
                         </v-toolbar-title>
                     </v-col>
 
                     <v-col v-if="$vuetify.breakpoint.lgAndUp">
-                        <v-btn v-for="(item, i) in barItems" :key="i" text class="text-capitalize mx-1" :to="item.to" exact-active-class="accent--text" exact>{{
+                        <v-btn v-for="(item, i) in barItems" :key="i" text class="text-capitalize mx-1" :to="item.to" exact-active-class="primary--text" exact>{{
                             item.title
                         }}</v-btn>
                     </v-col>
