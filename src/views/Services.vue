@@ -8,8 +8,6 @@
                             <h2 class="text-h4 font-weight-bold">Services</h2>
 
                             <h4 class="text-h6">Voici tous nos services détaillés.</h4>
-
-                           
                         </div>
 
                         <v-divider class="my-4"></v-divider>
@@ -17,13 +15,20 @@
                         <v-row v-if="dataLoaded">
                             <v-col cols="12" md="6" lg="4" v-for="(service, i) in services" :key="i">
                                 <div>
-                                    <v-card outlined :to="`services/${service.link}`" :title="`Afficher les détail du service : ${service.name}`">
+                                    <v-card
+                                        outlined
+                                        :to="`services/${service.link}`"
+                                        min-height="500"
+                                        max-height="500"
+                                        :title="`Afficher les détail du service : ${service.name}`"
+                                        class="limit-text "
+                                    >
                                         <v-card-title class="light">
                                             <v-icon class="custom accent white--text">{{ service.icon }}</v-icon>
                                             <h2 class="text-h5 ml-2">{{ service.name }}</h2>
                                         </v-card-title>
 
-                                        <v-card-text>
+                                        <v-card-text >
                                             <div class="text-body-1 py-4" v-html="service.description"></div>
                                         </v-card-text>
                                     </v-card>
@@ -77,3 +82,9 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.limit-text {
+    overflow-y: scroll;
+}
+</style>

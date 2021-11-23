@@ -6,17 +6,19 @@
             height: 600,
             menubar: false,
             plugins: [
-                'advlist autolink lists link image charmap print preview anchor quickbars',
+                'advlist autolink lists link image charmap print preview anchor quickbars print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists wordcount textpattern noneditable help charmap quickbars emoticons',
                 'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
+                'insertdatetime media table paste code help wordcount pagebreak'
             ],
+            menubar: 'file edit view insert format tools table help',
             toolbar:
                 'undo redo | formatselect | bold italic underline forecolor backcolor | \
-           alignleft aligncenter alignright alignjustify | \
+           alignleft aligncenter alignright alignjustify | table pagebreak  \
            bullist numlist outdent indent preview | removeformat | help',
             quickbars_selection_toolbar: 'bold italic underline | forecolor backcolor h2 h3 blockquote quickimage',
             skin: this.isDarkTheme ? 'oxide-dark' : 'oxide',
-            content_css: this.isDarkTheme ? 'dark' : 'default'
+            content_css: this.isDarkTheme ? 'dark' : 'default',
+            language: 'fr_FR'
         }"
         :value="data"
     />

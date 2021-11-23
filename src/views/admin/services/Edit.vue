@@ -100,8 +100,8 @@ export default {
             this.$http(`/service/${this.$route.params.id}`)
                 .then(res => {
                     that.service = res.data;
-                    if (this.cloneService === null) {
-                        this.cloneService = Object.assign({}, this.service);
+                    if (that.cloneService === null) {
+                        that.cloneService = Object.assign({}, that.service);
                     }
                 })
                 .catch(err => console.error(err));
