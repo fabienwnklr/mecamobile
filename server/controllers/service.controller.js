@@ -16,8 +16,8 @@ exports.getAllServices = (req, res) => {
 
 exports.getServicesHomePage = (req, res) => {
     Service.findAll({ attributes: ['name', 'icon', 'link'], where: { online: '1' } })
-        .then(data => {
-            res.send(data).status(200);
+        .then(service => {
+            res.send(service).status(200);
         })
         .catch(err =>
             res.status(500).send({
@@ -29,8 +29,11 @@ exports.getServicesHomePage = (req, res) => {
 
 exports.getServicesFull = (req, res) => {
     Service.findAll({ attributes: ['name', 'icon', 'description', 'link'], where: { online: '1' } })
-        .then(data => {
-            res.send(data).status(200);
+        .then(services => {
+            services.map(service => {
+                service.description = Buffer.from(service.description, 'base64').toString();
+            })
+            res.send(services).status(200);
         })
         .catch(err =>
             res.status(500).send({
@@ -49,7 +52,10 @@ exports.getServiceById = (req, res) => {
     }
 
     Service.findByPk(id)
-        .then(data => res.send(data))
+        .then(service => {
+            service.description = Buffer.from(service.description, 'base64').toString();
+            res.send(service);
+        })
         .catch(err =>
             res.status(500).send({
                 errorThrow: err.message,
@@ -62,7 +68,10 @@ exports.getServiceByLinkName = (req, res) => {
     const link = req.params.id;
 
     Service.findOne({ where: { link: link } })
-        .then(data => res.send(data))
+        .then(service => {
+            service.description = Buffer.from(service.description, 'base64').toString();
+            res.send(service);
+        })
         .catch(err =>
             res.status(500).send({
                 errorThrow: err.message,
@@ -118,6 +127,8 @@ exports.updateService = (req, res) => {
 
     values.link = link;
     values.updatedAt = +new Date();
+
+    values.description = Buffer.from(values.description).toString('base64');
 
     if (!values.icon.startsWith('mdi-')) {
         values.icon = 'mdi-' + req.body.icon;
