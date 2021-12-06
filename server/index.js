@@ -35,6 +35,7 @@ app.post('/api/contact', (req, res) => {
 
 require('./routes/user.routes')(app);
 require('./routes/service.routes')(app);
+require('./routes/event.routes')(app);
 
 db.sequelize.sync({ alter: false }).then(async () => {
     app.listen(port, () => {
