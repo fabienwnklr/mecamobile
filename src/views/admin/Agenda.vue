@@ -3,7 +3,7 @@
         <v-col>
             <v-sheet>
                 <v-toolbar flat>
-                    <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday"> Today </v-btn>
+                    <v-btn outlined class="mr-4" color="grey darken-2" @click="setToday"> Ajourd'hui </v-btn>
                     <v-btn fab text small color="grey darken-2" @click="prev">
                         <v-icon small> mdi-chevron-left </v-icon>
                     </v-btn>
@@ -52,8 +52,9 @@
                     @mousedown:event="startDrag"
                     @mousedown:time="startTime"
                     @mousemove:time="mouseMove"
-                    @mouseup:time="endDrag"
+                    @mouseup:event="endDrag"
                     @mouseleave.native="cancelDrag"
+                    @click:event="showEvent"
                 >
                     <template v-slot:event="{ event, timed, eventSummary }">
                         <div class="v-event-draggable" v-html="eventSummary()"></div>
@@ -91,35 +92,74 @@
 <script>
 export default {
     data: () => ({
+        type: 'week',
+        types: ['month', 'week', 'day', '4day'],
+        mode: 'stack',
+        modes: ['stack', 'column'],
+        weekday: [0, 1, 2, 3, 4, 5, 6],
+        weekdays: [
+            { text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+            { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
+            { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+            { text: 'Mon, Wed, Fri', value: [1, 3, 5] }
+        ],
         value: '',
         events: [],
         colors: ['#2196F3', '#3F51B5', '#673AB7', '#00BCD4', '#4CAF50', '#FF9800', '#757575'],
         names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
+        selectedElement: null,
         dragEvent: null,
         dragStart: null,
+        lastEvent: '',
         createEvent: null,
         createStart: null,
         extendOriginal: null,
         focus: '',
-        type: 'week',
         typeToLabel: {
             month: 'Mois',
             week: 'Semaine',
-            day: 'Journée',
-            '4day': '4 jours'
+            day: 'Journée'
         },
         selectedEvent: {},
-        selectedElement: null,
-        selectedOpen: false
+        selectedOpen: false,
+        isMounted: false,
+        triggerClick: true
     }),
-    methods: {
-        startDrag({ event, timed }) {
-            if (event && timed) {
-                this.dragEvent = event;
-                this.dragTime = null;
-                this.extendOriginal = null;
+    computed: {
+        nowY() {
+            const cal = this.$refs.calendar;
+            if (!cal && !this.isMounted) {
+                return -1;
             }
+
+            return cal.timeToY(cal.times.now) + 'px';
         },
+        nowTime() {
+            const cal = this.$refs.calendar;
+            if (!cal && !this.isMounted) {
+                return -1;
+            }
+
+            return cal.formatTime(cal.times.now);
+        }
+    },
+    mounted() {
+        const cal = this.$refs.calendar;
+
+        window.app = this;
+        window.cal = cal;
+
+        this.isMounted = true;
+
+        // scroll to the current time
+        const minutes = cal.times.now.hour * 60 + cal.times.now.minute;
+        const firstTime = Math.max(0, minutes - (minutes % 30) - 30);
+        cal.scrollToTime(firstTime);
+
+        // every minute update the current time bar
+        setInterval(() => cal.updateTimes(), 60 * 1000);
+    },
+    methods: {
         setToday() {
             this.focus = '';
         },
@@ -129,51 +169,131 @@ export default {
         next() {
             this.$refs.calendar.next();
         },
-        startTime(tms) {
-            const mouse = this.toTime(tms);
+        getEventColor(event) {
+            const rgb = parseInt(event.color.substring(1), 16);
+            const r = (rgb >> 16) & 0xff;
+            const g = (rgb >> 8) & 0xff;
+            const b = (rgb >> 0) & 0xff;
+
+            return event === this.dragEvent ? `rgba(${r}, ${g}, ${b}, 0.5)` : event === this.createEvent ? `rgba(${r}, ${g}, ${b}, 0.5)` : event.color;
+        },
+        showEvent({ nativeEvent, event }) {
+            if (this.triggerClick === false) {
+                this.hideEvent();
+                this.triggerClick = true;
+
+                nativeEvent.stopPropagation();
+                nativeEvent.stopImmediatePropagation();
+                nativeEvent.preventDefault();
+            }
+
+            const open = () => {
+                this.selectedEvent = event;
+                this.selectedElement = nativeEvent.target;
+                requestAnimationFrame(() => requestAnimationFrame(() => (this.selectedOpen = true)));
+            };
+
+            if (this.selectedOpen) {
+                this.selectedOpen = false;
+            } else {
+                open();
+            }
+
+            nativeEvent.stopPropagation();
+        },
+        hideEvent() {
+            this.selectedOpen = false;
+        },
+        getEventHTML(event, timed) {
+            const cal = this.$refs.calendar;
+            let name = event.name;
+            if (event.start.hasTime) {
+                if (timed) {
+                    const showStart = event.start.hour < 12 && event.end.hour >= 12;
+                    const start = cal.formatTime(event.start, showStart);
+                    const end = cal.formatTime(event.end, true);
+                    //   const singline = diffMinutes(event.start, event.end) <= this.parsedEventOverlapThreshold
+                    //   const separator = singline ? ', ' : '<br>'
+                    return `<strong>${name}</strong>${start} - ${end}`;
+                } else {
+                    const time = this.formatTime(event.start, true);
+                    return `<strong>${time}</strong> ${name}`;
+                }
+            }
+            return name;
+        },
+        rnd(a, b) {
+            return Math.floor((b - a + 1) * Math.random()) + a;
+        },
+        formatDate(a, withTime = true) {
+            return withTime
+                ? `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()} ${a.getHours()}:${a.getMinutes()}`
+                : `${a.getFullYear()}-${a.getMonth() + 1}-${a.getDate()}`;
+        },
+        eventMove(e) {
+            console.log('eventMove', e);
+        },
+        startDrag(e) {
+            if (e.event && e.timed) {
+                this.dragEvent = e.event;
+                this.dragTime = null;
+                this.extendOriginal = null;
+            }
+
+            this.lastEvent = 'startDrag';
+        },
+        startTime(e) {
+            const mouse = this.toDate(e);
 
             if (this.dragEvent && this.dragTime === null) {
-                const start = this.dragEvent.start;
+                const start = this.toDate(this.dragEvent.start);
 
-                this.dragTime = mouse - start;
+                this.dragTime = mouse.getTime() - start.getTime();
             } else {
-                this.createStart = this.roundTime(mouse);
+                this.createStart = this.roundTime(mouse.getTime());
                 this.createEvent = {
-                    name: `Event #${this.events.length}`,
-                    color: this.rndElement(this.colors),
-                    start: this.createStart,
-                    end: this.createStart,
-                    timed: true
+                    name: '(no title)',
+                    start: this.toTimestamp(new Date(this.createStart)),
+                    end: this.toTimestamp(new Date(this.createStart)),
+                    color: this.colors[this.rnd(0, this.colors.length - 1)]
                 };
-
                 this.events.push(this.createEvent);
             }
+            this.lastEvent = 'startTime';
         },
         extendBottom(event) {
             this.createEvent = event;
-            this.createStart = event.start;
+            this.createStart = this.toDate(event.start).getTime();
             this.extendOriginal = event.end;
         },
-        mouseMove(tms) {
-            const mouse = this.toTime(tms);
-
+        mouseMoveEvent(e) {
+            console.log('mouseMoveEvent', e);
+        },
+        mouseMove(e) {
             if (this.dragEvent && this.dragTime !== null) {
-                const start = this.dragEvent.start;
-                const end = this.dragEvent.end;
-                const duration = end - start;
-                const newStartTime = mouse - this.dragTime;
-                const newStart = this.roundTime(newStartTime);
-                const newEnd = newStart + duration;
+                this.triggerClick = false;
+                this.hideEvent();
+                const start = this.toDate(this.dragEvent.start);
+                const end = this.toDate(this.dragEvent.end);
+                const duration = end.getTime() - start.getTime();
+                const mouse = this.toDate(e);
 
-                this.dragEvent.start = newStart;
-                this.dragEvent.end = newEnd;
+                const newStartTime = mouse.getTime() - this.dragTime;
+                const newStart = new Date(this.roundTime(newStartTime));
+                const newEnd = new Date(newStart.getTime() + duration);
+
+                this.dragEvent.start = this.toTimestamp(newStart);
+                this.dragEvent.end = this.toTimestamp(newEnd);
             } else if (this.createEvent && this.createStart !== null) {
+                this.triggerClick = false;
+                this.hideEvent();
+                const mouse = this.toDate(e).getTime();
                 const mouseRounded = this.roundTime(mouse, false);
                 const min = Math.min(mouseRounded, this.createStart);
                 const max = Math.max(mouseRounded, this.createStart);
 
-                this.createEvent.start = min;
-                this.createEvent.end = max;
+                this.createEvent.start = this.toTimestamp(new Date(min));
+                this.createEvent.end = this.toTimestamp(new Date(max));
             }
         },
         endDrag() {
@@ -182,6 +302,8 @@ export default {
             this.createEvent = null;
             this.createStart = null;
             this.extendOriginal = null;
+
+            this.lastEvent = 'endDrag';
         },
         cancelDrag() {
             if (this.createEvent) {
@@ -199,37 +321,34 @@ export default {
             this.createStart = null;
             this.dragTime = null;
             this.dragEvent = null;
+
+            this.lastEvent = 'cancelDrag';
         },
         roundTime(time, down = true) {
-            const roundTo = 15; // minutes
-            const roundDownTime = roundTo * 60 * 1000;
+            const roundDownTime = 15 * 60 * 1000; // 15 minutes
 
             return down ? time - (time % roundDownTime) : time + (roundDownTime - (time % roundDownTime));
         },
-        toTime(tms) {
-            return new Date(tms.year, tms.month - 1, tms.day, tms.hour, tms.minute).getTime();
+        toDate(tms) {
+            return typeof tms === 'string' ? new Date(tms) : new Date(tms.year, tms.month - 1, tms.day, tms.hour, tms.minute);
         },
-        getEventColor(event) {
-            const rgb = parseInt(event.color.substring(1), 16);
-            const r = (rgb >> 16) & 0xff;
-            const g = (rgb >> 8) & 0xff;
-            const b = (rgb >> 0) & 0xff;
-
-            return event === this.dragEvent ? `rgba(${r}, ${g}, ${b}, 0.7)` : event === this.createEvent ? `rgba(${r}, ${g}, ${b}, 0.7)` : event.color;
+        toTimestamp(date) {
+            return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
         },
         async getEvents({ start, end }) {
+            const min = `${start.date}T00:00:00`;
+            const max = `${end.date}T23:59:59`;
 
-            // const min = new Date(`${start.date}T00:00:00`).getTime();
-            // const max = new Date(`${end.date}T23:59:59`).getTime();
-           
-           const { data: events } = await this.$http(`/event?start=${start.date}&end=${end.date}`);
+            const { data: events } = await this.$http(`/event?start=${min}&end=${max}`);
+
+            events.forEach(ev => {
+                const start = new Date(ev.start);
+                const end = new Date(ev.end);
+
+                ev.start = this.formatDate(start);
+                ev.end = this.formatDate(end);
+            });
             this.events = events;
-        },
-        rnd(a, b) {
-            return Math.floor((b - a + 1) * Math.random()) + a;
-        },
-        rndElement(arr) {
-            return arr[this.rnd(0, arr.length - 1)];
         }
     }
 };
@@ -237,8 +356,8 @@ export default {
 
 <style scoped lang="scss">
 .v-calendar {
-  user-select: none;
-  -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 .v-event-draggable {
     padding-left: 6px;

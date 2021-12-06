@@ -11,8 +11,8 @@ exports.getAllEvents = (req, res) => {
             }
         }
     })
-        .then(data => {
-            res.send(data).status(200);
+        .then(events => {
+            res.send(events).status(200);
         })
         .catch(err =>
             res.status(500).send({
@@ -43,20 +43,13 @@ exports.getEventById = (req, res) => {
 };
 
 exports.addEvent = (req, res) => {
-    // on créer l'ancre par rapport au nom du event
-    const link = req.body.name
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(' ', '_')
-        .toLowerCase();
-
     const newEvent = {
-        icon: 'mdi-' + req.body.icon,
         name: req.body.name,
-        status: req.body.status,
+        start: req.body.start,
+        end: req.body.end,
+        color: req.body.color,
         description: req.body.description,
-        createdBy: req.body.creator,
-        link
+        createdBy: req.body.creator
     };
 
     Event.create(newEvent)

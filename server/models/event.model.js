@@ -14,6 +14,11 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING(155),
                 allowNull: false
             },
+            color: {
+                type: Sequelize.STRING(100),
+                allowNull: false,
+                defaultValue: 'blue'
+            },
             description: {
                 type: Sequelize.TEXT(),
                 allowNull: true
