@@ -69,15 +69,6 @@ const routes = [
                 }
             },
             {
-                path: '/admin/agenda',
-                name: 'Agenda',
-                component: () => import('@/views/admin/Agenda.vue'),
-                meta: {
-                    title: 'Agenda',
-                    requiresAuth: true
-                }
-            },
-            {
                 path: '/admin/services/list',
                 name: 'Services/List',
                 component: ListService,

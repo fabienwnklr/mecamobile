@@ -48,11 +48,6 @@ export default {
                 to: '/admin/services/list',
                 icon: 'clipboard-list-outline'
             },
-            {
-                title: 'Agenda',
-                to: '/admin/agenda',
-                icon: 'calendar'
-            },
             // {
             //     title: 'Utilisateurs',
             //     to: '/admin/users',
