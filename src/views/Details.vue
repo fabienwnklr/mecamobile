@@ -22,7 +22,7 @@
                                         </v-card-title>
 
                                         <v-card-text>
-                                            <div class="text-body-1 py-4" v-html="service.description"></div>
+                                            <div class="text-body-1 py-4" id="container-body" v-html="service.description"></div>
                                         </v-card-text>
                                     </v-card>
                                 </div>
@@ -53,10 +53,27 @@ export default {
                 .catch(error => {
                     console.error(error);
                 });
+        },
+        wrap() {
+            debugger;
         }
     },
     mounted() {
         this.getServices();
+    },
+    updated() {
+        // const container = document.getElementById('container-body');
+        // const h3 = document.querySelectorAll('h3');
+
+
+        // if (h3.length > 1) {
+        //     h3.forEach(b => {
+        //         const html = b.innerHTML;
+        //         const newHTML = `<div>${html}</div>`;
+
+        //         b.innerHTML = newHTML;
+        //     })
+        // }
     }
 };
 </script>

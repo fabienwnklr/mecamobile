@@ -15,21 +15,29 @@
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar app :clipped-left="$vuetify.breakpoint.lgAndUp">
+        <v-app-bar app class="primary" :clipped-left="$vuetify.breakpoint.lgAndUp">
             <v-container :fluid="$vuetify.breakpoint.mdAndDown" :class="{ 'px-0': !$vuetify.breakpoint.smAndUp }">
                 <v-row align="center" justify="space-between" :no-gutters="!$vuetify.breakpoint.smAndUp">
-                    <v-col class="d-flex align-end">
+                    <v-col class="d-flex align-center">
                         <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.mdAndDown" />
-                        <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5 primary--text" @click="home">
-                            <v-icon large color="primary">mdi-feather</v-icon>Hero
-                            <span class="primary--text">UI</span>
+
+                        <v-img  @click="home" max-height="90%" max-width="100" src="@/assets/logo-fond-sombre.svg"></v-img>
+                        <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5" @click="home">
+                            <span class="secondary--text">Meca'mobile</span>
                         </v-toolbar-title>
                     </v-col>
 
                     <v-col v-if="$vuetify.breakpoint.lgAndUp">
-                        <v-btn v-for="(item, i) in barItems" :key="i" text class="text-capitalize mx-1" :to="item.to" exact-active-class="primary--text" exact>{{
-                            item.title
-                        }}</v-btn>
+                        <v-btn
+                            v-for="(item, i) in barItems"
+                            :key="i"
+                            text
+                            class="text-capitalize mx-1"
+                            :to="item.to"
+                            exact-active-class="secondary--text"
+                            exact
+                            >{{ item.title }}</v-btn
+                        >
                     </v-col>
 
                     <v-col class="text-right" v-if="$vuetify.breakpoint.smAndUp">
