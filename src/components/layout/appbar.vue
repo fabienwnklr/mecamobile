@@ -21,9 +21,9 @@
                     <v-col class="d-flex align-center">
                         <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.mdAndDown" />
 
-                        <v-img  @click="home" max-height="90%" max-width="100" src="@/assets/logo-fond-sombre.svg"></v-img>
+                        <v-img @click="home" max-height="90%" max-width="100" style="cursor: pointer" src="@/assets/logo-fond-sombre.svg"></v-img>
                         <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5" @click="home">
-                            <span class="secondary--text">Meca'mobile</span>
+                            <span class="secondary--text ml-2">Meca'mobile</span>
                         </v-toolbar-title>
                     </v-col>
 

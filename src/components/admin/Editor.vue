@@ -18,7 +18,10 @@
             quickbars_selection_toolbar: 'bold italic underline | forecolor backcolor h2 h3 blockquote quickimage',
             skin: this.isDarkTheme ? 'oxide-dark' : 'oxide',
             content_css: this.isDarkTheme ? 'dark' : 'default',
-            language: 'fr_FR'
+            language: 'fr_FR',
+            templates: [
+                { title: 'Grid', description: 'Grid template', url: 'grid.html' },
+            ]
         }"
         :value="data"
     />
