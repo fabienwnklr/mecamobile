@@ -9,28 +9,28 @@
                             <v-list-item-icon>
                                 <v-icon class="mr-2">mdi-home-map-marker</v-icon>
                             </v-list-item-icon>
-                            <v-list-item-content>Adresse </v-list-item-content>
+                            <v-list-item-content> 655 Rte d'Urt, 64240 Briscous </v-list-item-content>
                         </v-list-item>
                         <v-divider></v-divider>
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-icon class="mr-2">mdi-phone</v-icon>
                             </v-list-item-icon>
-                            <v-list-item-content> Tél </v-list-item-content>
+                            <v-list-item-content> 07.85.72.73.51 </v-list-item-content>
                         </v-list-item>
                         <v-divider></v-divider>
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-icon class="mr-2">mdi-mail</v-icon>
                             </v-list-item-icon>
-                            <v-list-item-content> mail client </v-list-item-content>
+                            <v-list-item-content> contact@mecamobile.fr </v-list-item-content>
                         </v-list-item>
                         <v-divider></v-divider>
                         <v-list-item>
                             <v-list-item-icon>
                                 <v-icon class="mr-2">mdi-mail</v-icon>
                             </v-list-item-icon>
-                            <v-list-item-content> mail pro </v-list-item-content>
+                            <v-list-item-content> drh@mecamobile.fr </v-list-item-content>
                         </v-list-item>
                     </v-list>
                 </v-card-text>

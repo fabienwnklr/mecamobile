@@ -87,4 +87,10 @@ export default {
 .limit-text {
     overflow-y: auto;
 }
+
+.v-card > .v-card__title {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
 </style>

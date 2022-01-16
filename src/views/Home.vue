@@ -3,7 +3,7 @@
         <div>
             <v-card>
                 <v-img
-                    src="../assets/camion.jpg"
+                    src="../assets/logo-fond-clair.png"
                     gradient="to top, rgba(25,32,72,.7), rgba(25,32,72,.0)"
                     :height="!$vuetify.breakpoint.smAndUp ? '85vh' : '50vh'"
                 >
@@ -15,10 +15,10 @@
                     <v-card-text class="fill-height d-flex align-end">
                         <v-row class="flex-column rounded">
                             <v-col cols="12" md="10" lg="8" xl="7">
-                                <h1 class="text-h3 py-3 light--text text-h4">MECAMOBILE 40 Entretien, diagnostic et réparations automobile à domicile</h1>
+                                <h1 class="text-h3 py-3 light--text text-h4">Entretien, diagnostic et réparations automobile à domicile</h1>
                             </v-col>
                             <v-col class="d-flex align-center">
-                                <v-btn color="primary bg-light mr-2 text-caption text-md-button" href="tel:123-456-7890"> Appeler </v-btn>
+                                <v-btn color="primary bg-light mr-2 text-caption text-md-button" href="tel:+33785727351"> Appeler </v-btn>
                                 <v-btn color="primary bg-light text-caption text-md-button" to="contact"> Envoyer un email </v-btn>
                             </v-col>
                         </v-row>

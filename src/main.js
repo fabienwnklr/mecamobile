@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'es6-promise';
 
 // Variable global de vue, $ est la convention Vue pour éviter de se perdre
-const APIurl = window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : 'http://garage/api';
+const APIurl = window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : 'http://mecamobile.fr/api';
 Vue.prototype.$http = axios.create({
     baseURL: APIurl,
     headers: {

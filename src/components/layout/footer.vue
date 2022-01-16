@@ -10,7 +10,7 @@
             </v-card-title>
 
             <v-card-text class="py-2 text-center secondary white--text"
-                >BestOil Team France Copyright © Tous droits réservés - Mentions légales - Politique de confidentialité</v-card-text
+                >Mecamobile France Copyright © Tous droits réservés - Mentions légales - Politique de confidentialité</v-card-text
             >
         </v-card>
     </v-footer>

@@ -48,11 +48,11 @@ export default {
                 to: '/admin/services/list',
                 icon: 'clipboard-list-outline'
             },
-            // {
-            //     title: 'Utilisateurs',
-            //     to: '/admin/users',
-            //     icon: 'account-group-outline'
-            // }
+            {
+                title: 'Utilisateurs',
+                to: '/admin/users',
+                icon: 'account-group-outline'
+            }
         ]
     }),
     methods: {
