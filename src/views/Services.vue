@@ -18,8 +18,8 @@
                                     <v-card
                                         outlined
                                         :to="`services/${service.link}`"
-                                        min-height="500"
-                                        max-height="500"
+                                        :min-height="$vuetify.breakpoint.mdAndDown ? '' : 500"
+                                        :max-height="$vuetify.breakpoint.mdAndDown ? '' : 500"
                                         :title="`Afficher les détail du service : ${service.name}`"
                                         class="limit-text "
                                     >

@@ -23,7 +23,7 @@
 
                         <v-img @click="home" max-height="90%" max-width="100" style="cursor: pointer" src="@/assets/logo-fond-sombre.svg"></v-img>
                         <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5" @click="home">
-                            <span class="secondary--text ml-2">Meca'mobile</span>
+                            <span class="secondary--text ml-2">Mecamobile</span>
                         </v-toolbar-title>
                     </v-col>
 
@@ -40,7 +40,7 @@
                         >
                     </v-col>
 
-                    <v-col class="text-right" v-if="$vuetify.breakpoint.smAndUp">
+                    <v-col class="text-right" v-if="$vuetify.breakpoint.mdAndUp">
                         <v-btn
                             v-for="(item, i) in btnItems"
                             :key="i"
