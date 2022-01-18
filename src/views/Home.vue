@@ -19,7 +19,7 @@
                             </v-col>
                             <v-col class="d-flex align-center">
                                 <v-btn color="primary bg-light mr-2 text-caption text-md-button" href="tel:+33785727351"> Appeler </v-btn>
-                                <v-btn color="primary bg-light text-caption text-md-button" to="contact"> Envoyer un email </v-btn>
+                                <v-btn color="primary bg-light text-caption text-md-button" href="mailto:contact@mecamobile.fr"> Envoyer un email </v-btn>
                             </v-col>
                         </v-row>
                     </v-card-text>
