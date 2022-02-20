@@ -19,7 +19,7 @@
             <v-container :fluid="$vuetify.breakpoint.mdAndDown" :class="{ 'px-0': !$vuetify.breakpoint.smAndUp }">
                 <v-row align="center" justify="space-between" :no-gutters="!$vuetify.breakpoint.smAndUp">
                     <v-col class="d-flex align-center">
-                        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="$vuetify.breakpoint.mdAndDown" />
+                        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.lgAndUp" />
 
                         <v-img @click="home" max-height="90%" max-width="100" style="cursor: pointer" src="@/assets/logo-fond-sombre.svg"></v-img>
                         <v-toolbar-title style="cursor: pointer" class="font-weight-bold text-h5" @click="home">

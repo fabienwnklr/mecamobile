@@ -15,7 +15,8 @@
                     <v-card-text class="fill-height d-flex align-end">
                         <v-row class="flex-column rounded">
                             <v-col cols="12" md="10" lg="8" xl="7">
-                                <h1 class="text-h3 py-3 light--text text-h4">Entretien, diagnostic et réparations automobile à domicile</h1>
+                                <h1 class="py-3 light--text text-h4">Entretien, diagnostic et réparations automobile à domicile</h1>
+                                <h4 class="light--text">sur Brisous et 20km autour, frais kilométrique au-delà de 20km (2€ par km)</h4>
                             </v-col>
                             <v-col class="d-flex align-center">
                                 <v-btn color="primary bg-light mr-2 text-caption text-md-button" href="tel:+33785727351"> Appeler </v-btn>
