@@ -7,7 +7,10 @@
                         <div>
                             <h2 class="text-h4 font-weight-bold">Services</h2>
 
-                            <h4 class="text-h6">Mécamobile se déplace à votre domicile, sur votre lieu de travail où n'importe ou ailleurs sur Brisous et 20km autour, au-delà frais kilométrique de 2€ par km.</h4>
+                            <h4 class="text-h6">
+                                Mécamobile se déplace à votre domicile, sur votre lieu de travail où n'importe ou ailleurs sur Brisous et 20km autour, au-delà
+                                frais kilométrique de 2€ par km.
+                            </h4>
                         </div>
 
                         <v-divider class="my-4"></v-divider>
@@ -21,14 +24,16 @@
                                         :min-height="$vuetify.breakpoint.smAndDown ? '' : 500"
                                         :max-height="$vuetify.breakpoint.smAndDown ? '' : 500"
                                         :title="`Afficher les détail du service : ${service.name}`"
-                                        class="limit-text "
+                                        class=""
                                     >
-                                        <v-card-title class="light">
-                                            <v-icon class="custom primary white--text">{{ service.icon }}</v-icon>
-                                            <h2 class="text-h5 ml-2">{{ service.name }}</h2>
-                                        </v-card-title>
+                                        <v-toolbar class="light" elevation="6" flat height="min-content">
+                                            <v-toolbar-title class="">
+                                                <v-icon class="custom primary white--text">{{ service.icon }}</v-icon>
+                                                {{ service.name }}
+                                            </v-toolbar-title>
+                                        </v-toolbar>
 
-                                        <v-card-text >
+                                        <v-card-text>
                                             <div class="text-body-1 py-4" v-html="service.description"></div>
                                         </v-card-text>
                                     </v-card>
@@ -84,12 +89,39 @@ export default {
 </script>
 
 <style scoped>
-.limit-text {
-    overflow-y: auto;
+.v-toolbar {
+    flex: 0;
+    padding: 0.6em;
+}
+.v-card {
+    display: flex !important;
+    flex-direction: column;
 }
 
-.v-card > .v-card__title {
-  position: sticky;
-  top: 0;
+.v-card__text {
+    flex-grow: 1;
+    overflow: auto;
+}
+.v-card__text p::nth-last-child {
+    margin-bottom: 0;
+}
+
+.v-card__text::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.v-card__text::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+.v-card__text::-webkit-scrollbar-thumb {
+    background: var(--v-primary-base);
+}
+
+/* Handle on hover */
+.v-card__text::-webkit-scrollbar-thumb:hover {
+    background: var(--v-primary-darken3);
 }
 </style>
