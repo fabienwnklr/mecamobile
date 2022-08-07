@@ -25,13 +25,6 @@
                             </v-list-item-icon>
                             <v-list-item-content> contact@mecamobile.fr </v-list-item-content>
                         </v-list-item>
-                        <v-divider></v-divider>
-                        <v-list-item>
-                            <v-list-item-icon>
-                                <v-icon class="mr-2">mdi-mail</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-content> drh@mecamobile.fr </v-list-item-content>
-                        </v-list-item>
                     </v-list>
                 </v-card-text>
             </v-card>
