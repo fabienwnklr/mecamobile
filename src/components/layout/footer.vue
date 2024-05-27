@@ -10,7 +10,7 @@
             </v-card-title>
 
             <v-card-text class="py-2 text-center secondary white--text"
-                >Mecamobile France Copyright © Tous droits réservés - Mentions légales - Politique de confidentialité</v-card-text
+                >Mecamobile France Copyright © Tous droits réservés - <a href="#">Mentions légales</a><a class="ml-2 text--secondary" href="/admin">admin</a></v-card-text
             >
         </v-card>
     </v-footer>
