@@ -45,6 +45,12 @@ const routes = [
         meta: { title: 'Contact' }
     },
     {
+        path: '/mentions-legales',
+        name: 'mentions-legales',
+        component: () => import('@/views/MentionsLegales.vue'),
+        meta: { title: 'Mentions légales' }
+    },
+    {
         path: '/admin',
         name: 'Admin',
         redirect: '/admin/login',
