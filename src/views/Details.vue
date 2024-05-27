@@ -16,10 +16,12 @@
                             <v-col cols="12">
                                 <div>
                                     <v-card outlined>
-                                        <v-card-title class="light">
-                                            <v-icon class="custom primary white--text">{{ service.icon }}</v-icon>
-                                            <h2 class="text-h5 ml-2">{{ service.name }}</h2>
-                                        </v-card-title>
+                                        <v-toolbar elevation="6" flat>
+                                            <v-toolbar-title>
+                                                <v-icon class="custom primary">{{ service.icon }}</v-icon>
+                                                {{ service.name }}
+                                            </v-toolbar-title>
+                                        </v-toolbar>
 
                                         <v-card-text>
                                             <div class="text-body-1 py-4" id="container-body" v-html="service.description"></div>

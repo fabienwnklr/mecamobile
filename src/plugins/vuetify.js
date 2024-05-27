@@ -20,8 +20,8 @@ const vuetify = new Vuetify({
         },
         themes: {
             light: {
-                primary: '#386FA4',
-                secondary: '#133C55',
+                primary: '#4d95db',
+                secondary: '#1e5c82',
                 light: colors.grey.lighten3,
                 light1: colors.grey.lighten1,
                 light2: '#91E5F6',

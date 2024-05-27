@@ -26,9 +26,9 @@
                                         :title="`Afficher les détail du service : ${service.name}`"
                                         class=""
                                     >
-                                        <v-toolbar class="light" elevation="6" flat height="min-content">
+                                        <v-toolbar elevation="6" flat height="min-content">
                                             <v-toolbar-title class="">
-                                                <v-icon class="custom primary white--text">{{ service.icon }}</v-icon>
+                                                <v-icon class="custom primary">{{ service.icon }}</v-icon>
                                                 {{ service.name }}
                                             </v-toolbar-title>
                                         </v-toolbar>

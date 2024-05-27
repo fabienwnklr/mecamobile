@@ -1,18 +1,17 @@
 <template>
     <div>
-        <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndDown" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app color="primary" dark>
+        <v-navigation-drawer v-if="$vuetify.breakpoint.mdAndDown" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app color="primary">
             <v-list nav color="primary">
-                <v-list-item v-for="(item, i) in btnItems" :key="i + 100" link :to="item.to" :href="item.href" :target="item.target">
-                    <v-list-item-content>
-                        <v-list-item-title>{{ item.text }}</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
                 <v-list-item v-for="(item, i) in barItems" :key="i" link :to="item.to" :href="item.href" :target="item.target">
                     <v-list-item-content>
                         <v-list-item-title>{{ item.title }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
+
+            <v-col cols="auto" class="text-right">
+                <v-switch color="light" append-icon="mdi-theme-light-dark" hide-details v-model="$vuetify.theme.dark"></v-switch>
+            </v-col>
         </v-navigation-drawer>
 
         <v-app-bar app class="primary" :clipped-left="$vuetify.breakpoint.lgAndUp">
@@ -54,6 +53,10 @@
                             <v-icon left>{{ item.icon }}</v-icon>
                             {{ item.text }}
                         </v-btn>
+                    </v-col>
+
+                    <v-col cols="auto" class="text-right" v-if="$vuetify.breakpoint.mdAndUp">
+                        <v-switch color="light" append-icon="mdi-theme-light-dark" hide-details v-model="$vuetify.theme.dark"></v-switch>
                     </v-col>
                 </v-row>
             </v-container>

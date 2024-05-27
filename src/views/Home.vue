@@ -51,7 +51,7 @@
                         <v-row class="mt-2" v-else>
                             <v-col cols="6" sm="6" md="4" lg="3" v-for="(service, i) in 8" :key="i">
                                 <v-skeleton-loader type="avatar"></v-skeleton-loader>
-                                <v-skeleton-loader width="200" type="list-item"></v-skeleton-loader>
+                                <v-skeleton-loader width="200" type="text" class="mt-2"></v-skeleton-loader>
                             </v-col>
                         </v-row>
                     </div>
