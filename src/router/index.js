@@ -60,15 +60,6 @@ const routes = [
                 }
             },
             {
-                path: '/admin/dashboard',
-                name: 'Dashboard',
-                component: () => import('@/views/admin/Dashboard.vue'),
-                meta: {
-                    title: 'Tableau de bord',
-                    requiresAuth: true
-                }
-            },
-            {
                 path: '/admin/services/list',
                 name: 'Services/List',
                 component: ListService,
@@ -126,7 +117,7 @@ router.beforeEach((to, from, next) => {
             next();
         } else {
             next({
-                name: 'Dashboard'
+                name: 'Services/List'
             });
         }
     } else {

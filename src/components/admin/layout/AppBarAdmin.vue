@@ -33,11 +33,6 @@ export default {
                 to: '/',
                 icon: 'home'
             },
-            // {
-            //     title: 'Tableau de bord',
-            //     to: '/admin/dashboard',
-            //     icon: 'view-dashboard'
-            // },
             {
                 title: 'Créer un service',
                 to: '/admin/services/create',

@@ -86,7 +86,7 @@ export default {
                         if (that.$route.params.nextUrl != null) {
                             that.$router.push(this.$route.params.nextUrl);
                         } else {
-                            that.$router.push('/admin/dashboard');
+                            that.$router.push('/admin/services/list');
                         }
                     })
                     .catch(error => {
