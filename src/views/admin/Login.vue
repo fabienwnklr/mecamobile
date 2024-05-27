@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="pa-0">
         <v-row style="height: 100vh" class="align-center justify-center">
             <v-col sm="10" md="6" lg="6">
                 <v-card>
@@ -27,6 +27,15 @@
                     </v-card-text>
                 </v-card>
             </v-col>
+            <v-snackbar bottom v-model="snackbar" :color="snackbarColor">
+                {{ snackbarText }}
+
+                <template v-slot:action="{ attrs }">
+                    <v-btn color="white" text v-bind="attrs" @click="snackbar = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                </template>
+            </v-snackbar>
         </v-row>
     </v-container>
 </template>
@@ -42,7 +51,10 @@ export default {
         userNameRules: [v => !!v || 'E-mail requis'],
         passRules: [v => !!v || 'Mot de passe requis'],
         select: null,
-        checkbox: false
+        checkbox: false,
+        snackbar: false,
+        snackbarText: '',
+        snackbarColor: '',
     }),
 
     methods: {
@@ -80,6 +92,9 @@ export default {
                     .catch(error => {
                         console.error(error);
                         this.clear();
+                        this.snackbar = true;
+                        this.snackbarText = error.response.data.message;
+                        this.snackbarColor = 'red';
                     });
             }
         }
