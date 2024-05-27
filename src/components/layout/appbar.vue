@@ -33,7 +33,6 @@
                             text
                             class="text-capitalize mx-1"
                             :to="item.to"
-                            exact-active-class="secondary--text"
                             exact
                             >{{ item.title }}</v-btn
                         >
