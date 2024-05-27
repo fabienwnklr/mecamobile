@@ -39,6 +39,9 @@
                     </v-card>
                 </v-dialog>
             </template>
+            <template v-slot:no-data>
+                <v-btn color="primary" @click="getServices"> Rafraichir </v-btn>
+            </template>
             <template v-slot:expanded-item="{ headers, item }">
                 <td :colspan="headers.length">
                     <ul>
@@ -79,7 +82,7 @@
                 </span>
             </template>
             <template v-slot:[`item.description`]="{ item }">
-                <span v-html="item.description"></span>
+                <div class="text-truncate" v-html="item.description"></div>
             </template>
             <template v-slot:[`item.online`]="{ item }">
                 <v-icon :color="item.online ? 'success' : 'red'"> {{ item.online ? 'mdi-check' : 'mdi-close' }}</v-icon>
@@ -92,6 +95,13 @@
         </v-data-table>
     </v-card>
 </template>
+
+<style>
+ .text-truncate {
+       max-width: 130px;
+       max-height: 130px;
+    }
+</style>
 
 <script>
 export default {
@@ -113,7 +123,7 @@ export default {
                     align: 'start',
                     value: 'name'
                 },
-                { text: 'Description', value: 'description' },
+                { text: 'Description', value: 'description', cellClass: "text-truncate" },
                 { text: 'Actif', value: 'online' },
                 { text: 'Actions ', value: 'actions', sortable: false }
             ]
