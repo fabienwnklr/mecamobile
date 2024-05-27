@@ -31,6 +31,14 @@
         </v-col>
 
         <v-col cols="12" md="8">
+            <v-alert text type="info" border="left">
+                <h3 class="text-h5 mb-2">Opposition au démarchage téléphonique</h3>
+                <p>Votre numéro de téléphone est requis afin de pouvoir vous contacter, il n'est ni stocké ni utilisé à des fins commerciaux.</p>
+                <p>
+                    Vous pouvez tout de même faire opposition au démarchage téléphonique, en utilisant
+                    <a href="https://www.bloctel.gouv.fr/">https://www.bloctel.gouv.fr/</a> (site officiel du gouvernement).
+                </p>
+            </v-alert>
             <v-form ref="contactForm" v-model="valid" lazy-validation>
                 <v-text-field v-model="fullName" :rules="fullNameRules" type="text" label="*Nom et prénom" outlined></v-text-field>
 
@@ -41,15 +49,6 @@
                 <v-textarea v-model="message" label="*Message" outlined :rules="messageRules"></v-textarea>
 
                 <v-spacer></v-spacer>
-                <v-alert text type="info" border="left">
-                    <h3 class="text-h5 mb-2">Opposition au démarchage téléphonique</h3>
-                    <p>
-                        Votre numéro de téléphone est requis afin de pouvoir vous contacter, il n'est ni stocké ni utilisé à des fins commerciaux.
-                    </p>
-                    <p>
-                        Vous pouvez tout de même faire opposition au démarchage téléphonique, en utilisant <a href="https://www.bloctel.gouv.fr/">https://www.bloctel.gouv.fr/</a> (site officiel du gouvernement).
-                    </p>
-                </v-alert>
 
                 <v-btn color="primary" :loading="loading" @click="submit"> Envoyer </v-btn>
             </v-form>
