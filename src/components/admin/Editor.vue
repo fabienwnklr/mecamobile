@@ -1,7 +1,7 @@
 <template>
     <editor
         ref="CEditor"
-        api-key="u3ded68aeqsndhshanqxnsdu0v4ok0ii0mkphffsqi279gu5"
+        api-key="g7rkilellm263k5a8g175a0l54e9hpz1qva5vicdlvgjoi42"
         :init="{
             height: '70vh',
             menubar: false,
